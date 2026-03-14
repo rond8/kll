@@ -65,6 +65,7 @@ function login() {
 
           <br>
           <button onclick="location.reload()">Logout</button>
+          <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
           <button onclick="refreshGrades()">Refresh Grades</button>
         `;
 
