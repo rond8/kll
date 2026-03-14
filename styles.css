@@ -1,117 +1,134 @@
 @font-face {
-  font-family: 'kllf'; /* Name you’ll use in CSS */
-  src: url('kll.ttf') format('truetype'); /* Path to your TTF file */
-  font-weight: normal; /* Optional: normal, bold, 100–900 */
-  font-style: normal;  /* Optional: normal, italic, oblique */
-}
-@font-face {
-  font-family: 'gb'; /* Name you’ll use in CSS */
-  src: url('gb.ttf') format('truetype'); /* Path to your TTF file */
-  font-weight: normal; /* Optional: normal, bold, 100–900 */
-  font-style: normal;  /* Optional: normal, italic, oblique */
+  font-family: 'kllf';
+  src: url('kll.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'main'; /* Name you’ll use in CSS */
-  src: url('main.ttf') format('truetype'); /* Path to your TTF file */
-  font-weight: normal; /* Optional: normal, bold, 100–900 */
-  font-style: normal;  /* Optional: normal, italic, oblique */
+  font-family: 'gb';
+  src: url('gb.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'main';
+  src: url('main.ttf') format('truetype');
+}
 
-    #schoolicon{  float: left; margin-right: 20px;
-        border-radius: 5%;
-        width: 150px;}
+/* Global */
+*{
+box-sizing:border-box;
+}
+
 body{
-    margin:0;
-    font-family: 'main',Arial, sans-serif;
+margin:0;
+font-family:'main', Arial, sans-serif;
+}
+
+/* School Icon */
+#schoolicon{
+float:left;
+margin-right:20px;
+border-radius:5%;
+width:150px;
+max-width:100%;
 }
 
 /* Header */
-header{font-family: 'kllf', Arial, sans-serif;
-    background:red;
-    color:white;
-    padding:20px;
-    text-align:center;
+header{
+font-family:'kllf', Arial, sans-serif;
+background:red;
+color:white;
+padding:20px;
+text-align:center;
 }
-h1{font-family: 'kllf', Arial, sans-serif;margin:0;}
-    
-/* Navigation Bar */
+
+h1{
+font-family:'kllf', Arial, sans-serif;
+margin:0;
+}
+
+/* Navigation */
 nav{
-    background:#333;
-    font-family: 'gb', Courier, monospace;
+background:#333;
+font-family:'gb', Courier, monospace;
 }
 
 nav ul{
-    list-style:none;
-    margin:0;
-    padding:0;
-    display:flex;
+list-style:none;
+margin:0;
+padding:0;
+display:flex;
+flex-wrap:wrap;
 }
 
 nav ul li{
-    flex:1;
+flex:1;
+min-width:120px;
 }
 
 nav ul li a{
-    display:block;
-    padding:14px;
-    text-align:center;
-    text-decoration:none;
-    color:white;
+display:block;
+padding:14px;
+text-align:center;
+text-decoration:none;
+color:white;
 }
 
 nav ul li a:hover{
-    background:#8c0202;
+background:#8c0202;
 }
 
 /* Content */
 section{
-    padding:40px;
+padding:40px;
+max-width:1200px;
+margin:auto;
 }
 
+/* Footer */
 footer{
-    background:#222;
-    color:white;
-    text-align:center;
-    padding:15px;
+background:#222;
+color:white;
+text-align:center;
+padding:15px;
 }
 
 /* Announcement Modal */
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    padding-top: 120px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
+.modal{
+display:none;
+position:fixed;
+z-index:999;
+padding-top:120px;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background-color:rgba(0,0,0,0.6);
 }
 
-.modal-content {
-    background: white;
-    margin: auto;
-    padding: 20px;
-    width: 60%;
-    max-height: 70vh; /* max height relative to viewport */
-    border-radius: 8px;
-    text-align: center;
-    overflow-y: auto; /* enables vertical scrolling */
+.modal-content{
+background:white;
+margin:auto;
+padding:20px;
+width:90%;
+max-width:700px;
+max-height:70vh;
+border-radius:8px;
+text-align:center;
+overflow-y:auto;
 }
 
-.close {
-    float: right;
-    font-size: 28px;
-    cursor: pointer;
+.close{
+float:right;
+font-size:28px;
+cursor:pointer;
 }
 
-    
+/* Login */
 
 #login{
-width:300px;
+width:90%;
+max-width:300px;
 margin:40px auto;
 background:white;
 padding:20px;
@@ -119,17 +136,26 @@ border-radius:5px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Inputs */
+
 input{
 width:100%;
 padding:10px;
 margin:8px 0;
 }
+
+/* Image */
+
 #cimg{
-width:752px;
-height: 100%;
+width:100%;
+height:auto;
+max-width:752px;
 }
 
+/* Result */
+
 #result{
+width:90%;
 max-width:700px;
 margin:20px auto;
 background:white;
@@ -137,26 +163,82 @@ padding:20px;
 border-radius:5px;
 }
 
+/* Table */
+
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:10px;
+overflow-x:auto;
+display:block;
 }
 
 th,td{
 border:1px solid #ccc;
 padding:8px;
+text-align:left;
 }
 
 th{
 background:#f0f0f0;
 }
 
-h2,h3{font-family: 'kllf', Arial, sans-serif;
-    color:red;
+/* Headings */
+
+h2,h3{
+font-family:'kllf', Arial, sans-serif;
+color:red;
 }
 
+/* Links */
+
 a{
-    color:#8c0202;
-    text-decoration:none;
+color:#8c0202;
+text-decoration:none;
+}
+
+/* Responsive Breakpoints */
+
+/* Tablets */
+@media (max-width: 768px){
+
+header{
+padding:15px;
+}
+
+section{
+padding:20px;
+}
+
+nav ul{
+flex-direction:column;
+}
+
+nav ul li{
+width:100%;
+}
+
+#schoolicon{
+float:none;
+display:block;
+margin:0 auto 15px;
+}
+
+}
+
+/* Phones */
+@media (max-width: 480px){
+
+h1{
+font-size:22px;
+}
+
+.modal-content{
+width:95%;
+}
+
+#login{
+margin:20px auto;
+}
+
 }
