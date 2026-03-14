@@ -1,89 +1,92 @@
+const apiURL = "https://script.google.com/macros/s/AKfycbzhZhRXo4df40LAMr3aGCvhAZ0pFYgtyZmr4Nlx-ecBX38rSv_85bCx16jZSGTepeI/exec";
 
-const apiURL="https://script.google.com/macros/s/AKfycbwa5zoScQ_143N2ts2EcXyFUVlAy51RgYsdj4pgM_rHylux6Xx8sXMJTKijOjY2CS0/exec";
+function login() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-function login(){
+  if (!username || !password) {
+    document.getElementById("result").innerText = "Enter username and password";
+    return;
+  }
 
-document.getElementById("result").innerText="Logging in...";
+  // Show logging in message
+  document.getElementById("result").innerText = "Logging in...";
 
-const username=document.getElementById("username").value.trim();
-const password=document.getElementById("password").value.trim();
+  // Add timestamp to prevent caching
+  const url =
+    apiURL +
+    "?username=" +
+    encodeURIComponent(username) +
+    "&password=" +
+    encodeURIComponent(password) +
+    "&t=" + new Date().getTime();
 
-if(!username||!password){
-document.getElementById("result").innerText="Enter username and password";
-return;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") {
+        // Sort by year and semester
+        data.grades.sort((a, b) => a.year - b.year || a.semester - b.semester);
+
+        let rows = "";
+        data.grades.forEach(g => {
+          rows += `
+            <tr>
+              <td>${g.year}</td>
+              <td>${g.semester}</td>
+              <td>${g.coursecode}</td>
+              <td>${g.subject}</td>
+              <td>${g.teacher}</td>
+              <td>${g.grade}</td>
+            </tr>
+          `;
+        });
+
+        document.getElementById("result").innerHTML = `
+          <h2>${data.name}</h2>
+          <p><strong>Course:</strong> ${data.course}</p>
+
+          <h3>Grades</h3>
+          <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Course Code</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows}
+            </tbody>
+          </table>
+
+          <br>
+          <button onclick="location.reload()">Logout</button>
+          <button onclick="refreshGrades()">Refresh Grades</button>
+        `;
+
+        document.getElementById("login").style.display = "none";
+      } else {
+        document.getElementById("result").innerText = "❌ Invalid username or password.";
+      }
+    })
+    .catch(() => {
+      document.getElementById("result").innerText = "⚠️ Cannot connect to server.";
+    });
 }
 
-const url=apiURL+"?username="+encodeURIComponent(username)+"&password="+encodeURIComponent(password);
-
-fetch(url)
-
-.then(res=>res.json())
-
-.then(data=>{
-
-if(data.status==="success"){
-
-let subjectRows="";
-
-data.grades.forEach(g=>{
-
-subjectRows+=`
-<tr>
-<td>${g.subject}</td>
-<td>${g.grade}</td>
-</tr>
-`;
-
+// Enter key triggers login
+document.getElementById("password").addEventListener("keypress", e => {
+  if (e.key === "Enter") login();
 });
 
-document.getElementById("result").innerHTML=`
-
-
-<h2>${data.name}</h2>
-
-<p>
-<strong>Year Level:</strong> ${data.yearlevel}
-<br>
-<strong>Course:</strong> ${data.course}
-</p>
-
-<h3>Grades</h3><h3>FIRST YEAR</h3>
-
-<table>
-
-<tr>
-<th>Subject</th>
-<th>Grade</th>
-</tr>
-
-${subjectRows}
-
-</table>
-<button onclick="location.reload()">Logout</button>
-<button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
-`;
-
-document.getElementById("login").style.display="none";
-
+// Refresh grades function
+function refreshGrades() {
+  if (document.getElementById("login").style.display === "none") {
+    login(); // re-fetch grades
+  }
 }
-
-else{
-
-document.getElementById("result").innerText="❌ Invalid username or password.";
-
-}
-
-})
-
-.catch(()=>{
-
-document.getElementById("result").innerText="⚠️ Cannot connect to server.";
-
-});
-
-}
-
-document.getElementById("password").addEventListener("keypress",function(e){
-if(e.key==="Enter")login();
-});
 
