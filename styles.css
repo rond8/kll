@@ -135,6 +135,7 @@ transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal.show {
+display: block;
 opacity: 1;
 visibility: visible;
 }
