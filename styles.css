@@ -287,8 +287,14 @@ h1{
 font-size:22px;
 }
 
+header {
+    text-align: left;
+}
+
 header img {
-    max-height: 350px; /* Higher height on phones */
+    float: left;
+    width: 150px;
+    max-height: 100px;
 }
 
 .modal-content{
