@@ -1,6 +1,7 @@
 const navbar = `
 <header>
     <img src="schoolicon.jpg" alt="" id="schoolicon">
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <h1>Kolehiyo ng Lungsod ng Lipa</h1>
 </header>
 
@@ -17,7 +18,10 @@ const navbar = `
 
 
 function displaynav() {
-     document.getElementById("navbar").innerHTML = navbar;
+     const container = document.getElementById("navbar");
+     if (!container) return;
+
+     container.innerHTML = navbar;
 
      const toggle = document.getElementById('navToggle');
      const nav = document.getElementById('mainNav');
@@ -38,4 +42,4 @@ function displaynav() {
      }
 }
 
-displaynav();
+document.addEventListener('DOMContentLoaded', displaynav);

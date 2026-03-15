@@ -68,6 +68,7 @@ header {
     padding: 10px 14px;
     border-radius: 6px;
     cursor: pointer;
+    z-index: 1000;
 }
 
 nav{
@@ -282,26 +283,25 @@ padding:20px;
 }
 
 nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    display: block;
+    position: relative;
     width: 100%;
     background: #333;
     z-index: 999;
 }
 
-nav.open {
-    display: block;
+nav.open ul {
+    display: flex;
 }
 
 nav ul{
-flex-direction:column;
+    display: none;
+    flex-direction:column;
 }
 
 nav ul li{
-width:100%;
-min-width:0;
+    width:100%;
+    min-width:0;
 }
 
 nav ul li a{
