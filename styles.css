@@ -18,7 +18,7 @@
 box-sizing:border-box;
 }
 
-body{
+body{ background-color: #ff0000;
 margin:0;
 font-family:'main', Arial, sans-serif;
 }
@@ -268,7 +268,7 @@ text-decoration:none;
 
 /* Card Styles */
 .card{
-    background:rgb(34, 14, 14);
+    background:white;
     border-radius:10px;
     padding:20px;
     margin:20px 0;
