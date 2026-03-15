@@ -37,7 +37,7 @@ header{
 font-family:'kllf', Arial, sans-serif;
 background:red;
 color:white;
-padding:20px;
+padding:0;
 text-align:center;
 }
 
@@ -253,7 +253,7 @@ text-decoration:none;
 @media (max-width: 768px){
 
 header{
-padding:15px;
+padding:0;
 }
 
 header img {
