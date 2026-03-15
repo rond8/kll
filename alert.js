@@ -11,11 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             document.getElementById("announcementText").innerHTML = data;
-            // Removed auto-display
+            // Show announcement on first visit
+            if (!localStorage.getItem('hasVisited')) {
+                document.getElementById('announcementModal').style.display = 'block';
+                localStorage.setItem('hasVisited', 'true');
+            }
         })
         .catch(() => {
             document.getElementById("announcementText").innerText = "Announcement unavailable.";
-            // Removed auto-display
         });
 
     // Close button
