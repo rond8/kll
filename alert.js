@@ -11,10 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             document.getElementById("announcementText").innerHTML = data;
-            // Show announcement on first visit
-            if (!localStorage.getItem('hasVisited')) {
+            // Show announcement if it's new or first visit
+            const lastAnnouncement = localStorage.getItem('lastAnnouncement');
+            if (lastAnnouncement !== data) {
                 document.getElementById('announcementModal').style.display = 'block';
-                localStorage.setItem('hasVisited', 'true');
+                localStorage.setItem('lastAnnouncement', data);
             }
         })
         .catch(() => {
