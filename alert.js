@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             document.getElementById("announcementText").innerHTML = data;
-            document.getElementById("announcementModal").style.display = "block";
+            // Removed auto-display
         })
         .catch(() => {
             document.getElementById("announcementText").innerText = "Announcement unavailable.";
-            document.getElementById("announcementModal").style.display = "block";
+            // Removed auto-display
         });
 
     // Close button
