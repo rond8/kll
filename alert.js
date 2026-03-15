@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+    // Show loading spinner
+    const loading = document.getElementById('loading');
+    const announcementText = document.getElementById('announcementText');
+    if (loading) loading.style.display = 'block';
+
     // Direct download links for Dropbox files
     const dropboxFiles = [        "https://dl.dropboxusercontent.com/scl/fi/53yy17muuqq3e4b0pm3i4/announce.txt?rlkey=fp2sr8w7q160rsrur9fqaqfbb"];
 
@@ -10,17 +15,32 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.text();
         })
         .then(data => {
-            document.getElementById("announcementText").innerHTML = data;
+            // Hide loading, show content
+            if (loading) loading.style.display = 'none';
+            announcementText.innerHTML = data;
             // Show announcement if it's new or first visit
             const lastAnnouncement = localStorage.getItem('lastAnnouncement');
             if (lastAnnouncement !== data) {
-                document.getElementById('announcementModal').style.display = 'block';
+                const modal = document.getElementById('announcementModal');
+                if (modal) {
+                    modal.classList.add('show');
+                }
                 localStorage.setItem('lastAnnouncement', data);
             }
         })
         .catch(() => {
-            document.getElementById("announcementText").innerText = "Announcement unavailable.";
+            if (loading) loading.style.display = 'none';
+            announcementText.innerText = "Announcement unavailable.";
         });
+
+    // Close button
+    const closeBtn = document.querySelector(".close");
+    if (closeBtn) {
+        closeBtn.onclick = function() {
+            const modal = document.getElementById('announcementModal');
+            if (modal) modal.classList.remove('show');
+        }
+    }
 
     // Close button
     document.querySelector(".close").onclick = function() {

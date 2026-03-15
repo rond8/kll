@@ -129,6 +129,14 @@ top:0;
 width:100%;
 height:100%;
 background-color:rgba(0,0,0,0.6);
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+opacity: 1;
+visibility: visible;
 }
 
 .modal-content{
@@ -141,12 +149,40 @@ max-height:70vh;
 border-radius:8px;
 text-align:center;
 overflow-y:auto;
+animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+from {
+    transform: translateY(-50px);
+    opacity: 0;
+}
+to {
+    transform: translateY(0);
+    opacity: 1;
+}
 }
 
 .close{
 float:right;
 font-size:28px;
 cursor:pointer;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Login */
