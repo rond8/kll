@@ -283,6 +283,12 @@ padding:20px;
 
 nav {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #333;
+    z-index: 999;
 }
 
 nav.open {
@@ -295,6 +301,12 @@ flex-direction:column;
 
 nav ul li{
 width:100%;
+min-width:0;
+}
+
+nav ul li a{
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 #schoolicon{
