@@ -243,7 +243,7 @@ display:block;
 }
 
 th,td{
-border:1px solid #ccc;
+border:1px solid #ff0000;
 padding:8px;
 text-align:left;
 }
@@ -268,7 +268,7 @@ text-decoration:none;
 
 /* Card Styles */
 .card{
-    background:white;
+    background:rgb(34, 14, 14);
     border-radius:10px;
     padding:20px;
     margin:20px 0;
@@ -281,8 +281,8 @@ text-decoration:none;
 }
 
 .card h2{
-    color:#34495e;
-    border-bottom:2px solid #3498db;
+    color:#5e3434;
+    border-bottom:2px solid #db3434;
     padding-bottom:8px;
 }
 
