@@ -1,7 +1,7 @@
 const navbar = `
 <header>
     <img src="schoolicon.jpg" alt="" id="schoolicon">
-    <h1>Kolehiyo ng Lungsod ng Lipa</h1>
+   
 </header>
 
 <nav>
