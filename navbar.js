@@ -1,6 +1,5 @@
 const navbar = `
 <header>
-    <img src="asset/img/schoolicon.jpg" alt="" id="schoolicon">
     <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <h1>Kolehiyo ng Lungsod ng Lipa</h1>
 </header>
