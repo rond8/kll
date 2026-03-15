@@ -52,6 +52,24 @@ margin:0;
 }
 
 /* Navigation */
+header {
+    position: relative;
+}
+
+.nav-toggle {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 nav{
 background:#333;
 font-family:'gb', Courier, monospace;
@@ -263,6 +281,14 @@ section{
 padding:20px;
 }
 
+nav {
+    display: none;
+}
+
+nav.open {
+    display: block;
+}
+
 nav ul{
 flex-direction:column;
 }
@@ -277,8 +303,11 @@ display:block;
 margin:0 auto 15px;
 }
 
+.nav-toggle {
+    display: block;
 }
 
+}
 /* Phones */
 @media (max-width: 480px){
 
@@ -286,14 +315,28 @@ h1{
 font-size:22px;
 }
 
+body {
+    padding: 0 10px;
+}
+
 header {
-    text-align: left;
+    text-align: center;
 }
 
 header img {
-    float: left;
-    width: 150px;
-    max-height: 100px;
+    float: none;
+    width: 100%;
+    max-height: none;
+}
+
+.card {
+    padding: 15px;
+    margin: 12px 0;
+}
+
+.announcement-btn {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .modal-content{
