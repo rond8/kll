@@ -8,12 +8,11 @@
 
 </head>
 <body>
-    <header>
-    <img src="index.jpg" alt="KLL Index">
-</header>
 <div id="navbar"></div>
 
-
+<header>
+    <img src="index.jpg" alt="KLL Index">
+</header>
 
 <button class="announcement-btn" onclick="document.getElementById('announcementModal').style.display='block'">View Announcements</button>
 
@@ -145,7 +144,7 @@ window.addEventListener('scroll', function() {
 });
 </script>
 <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
-</body>
+
 <div id="announcementModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -153,8 +152,9 @@ window.addEventListener('scroll', function() {
     <div id="announcementText">
         <img src="index.jpg" alt="Loading announcement" id="loading">
     </div>
-    </div>
   </div>
 </div>
-<script src="navbar.js" ></script>
+
+<script src="navbar.js"></script>
+</body>
 </html>
