@@ -41,6 +41,12 @@ padding:20px;
 text-align:center;
 }
 
+header img {
+    width: 100%;
+    height: auto;
+    max-height: 150px; /* Small height on PC */
+}
+
 h1{
 font-family:'kllf', Arial, sans-serif;
 margin:0;
@@ -163,6 +169,14 @@ padding:20px;
 border-radius:5px;
 }
 
+/* Loading Image */
+
+#loading {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
+
 /* Table */
 
 table{
@@ -242,6 +256,10 @@ header{
 padding:15px;
 }
 
+header img {
+    max-height: 250px; /* Medium height on tablets */
+}
+
 section{
 padding:20px;
 }
@@ -267,6 +285,10 @@ margin:0 auto 15px;
 
 h1{
 font-size:22px;
+}
+
+header img {
+    max-height: 350px; /* Higher height on phones */
 }
 
 .modal-content{
