@@ -116,7 +116,17 @@
 <p>© 2026 Kolehiyo ng lungsod ng lipa</p>
 </footer>
 <script src="alert.js"></script>
-
+<script>
+window.addEventListener('scroll', function() {
+    const button = document.querySelector('.back-to-top');
+    if (window.pageYOffset > 100) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+});
+</script>
+<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 </body>
 <div id="announcementModal" class="modal">
   <div class="modal-content">
