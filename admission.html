@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission - Kolehiyo ng Lungsod ng Lipa</title>
+</head>
+<body>
+<div id="navbar"></div>
+
+<div class="card">
+    <h2>Admission Requirements</h2>
+    <p>To be admitted to Kolehiyo ng Lungsod ng Lipa, applicants must meet the following requirements:</p>
+    <ul>
+        <li>High school diploma or equivalent</li>
+        <li>Completed application form</li>
+        <li>Transcript of records</li>
+        <li>Birth certificate</li>
+        <li>Medical certificate</li>
+        <li>Two (2) passport-sized photos</li>
+        <li>Barangay clearance</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>Application Process</h2>
+    <p>The admission process involves the following steps:</p>
+    <ol>
+        <li>Submit completed application form and requirements to the Admissions Office</li>
+        <li>Take the entrance examination</li>
+        <li>Interview with the Admissions Committee</li>
+        <li>Receive notification of acceptance</li>
+        <li>Enroll and pay fees</li>
+    </ol>
+</div>
+
+<div class="card">
+    <h2>Important Dates</h2>
+    <p>Please note the following important dates for admission:</p>
+    <ul>
+        <li>Application Period: January to March</li>
+        <li>Entrance Examination: April</li>
+        <li>Interview: May</li>
+        <li>Enrollment: June</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>Contact Information</h2>
+    <p>For more information about admission, please contact:</p>
+    <p>Admissions Office<br>
+    Kolehiyo ng Lungsod ng Lipa<br>
+    Phone: (043) 123-4567<br>
+    Email: admissions@kll.edu.ph</p>
+</div>
+
+<script src="navbar.js"></script>
+<script>
+window.addEventListener('scroll', function() {
+    const button = document.querySelector('.back-to-top');
+    if (window.pageYOffset > 100) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+});
+</script>
+<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+</body>
+</html>

@@ -9,6 +9,7 @@ const navbar = `
 <li><a href="about.html">ABOUT US</a></li>
 <li><a href="student_login.html">STUDENT PORTAL</a></li>
 <li><a href="programs.html">PROGRAMS</a></li>
+<li><a href="admission.html">ADMISSION</a></li>
 <li><a href="contacts.html">CONTACT US</a></li>
 </ul>
 </nav>
