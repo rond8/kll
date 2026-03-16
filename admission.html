@@ -1,71 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admission - Kolehiyo ng Lungsod ng Lipa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .bg-kll-maroon {
+            background-color: #800000; /* Maroon color matching KLL theme */
+        }
+        .text-kll-maroon {
+            color: #800000;
+        }
+        .border-kll-maroon {
+            border-color: #800000;
+        }
+    </style>
 </head>
-<body>
-<div id="navbar"></div>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
-<div class="card">
-    <h2>Admission Requirements</h2>
-    <p>To be admitted to Kolehiyo ng Lungsod ng Lipa, applicants must meet the following requirements:</p>
-    <ul>
-        <li>High school diploma or equivalent</li>
-        <li>Completed application form</li>
-        <li>Transcript of records</li>
-        <li>Birth certificate</li>
-        <li>Medical certificate</li>
-        <li>Two (2) passport-sized photos</li>
-        <li>Barangay clearance</li>
-    </ul>
-</div>
+    <!-- Navbar -->
+    <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <!-- Placeholder for Logo if needed, using text for now -->
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
+                    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+                </div>
+                <div class="hidden sm:block">
+                    <span class="text-sm font-medium text-yellow-400">Admissions Portal A.Y. 2026-2027</span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<div class="card">
-    <h2>Application Process</h2>
-    <p>The admission process involves the following steps:</p>
-    <ol>
-        <li>Submit completed application form and requirements to the Admissions Office</li>
-        <li>Take the entrance examination</li>
-        <li>Interview with the Admissions Committee</li>
-        <li>Receive notification of acceptance</li>
-        <li>Enroll and pay fees</li>
-    </ol>
-</div>
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
+        
+        <!-- Header Section -->
+        <div class="text-center py-6">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-kll-maroon mb-4 uppercase tracking-tight">Admissions Guidelines</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Welcome to the Kolehiyo ng Lungsod ng Lipa. Please review the schedule, courses offered, procedures, and requirements for Academic Year 2026-2027.</p>
+        </div>
 
-<div class="card">
-    <h2>Important Dates</h2>
-    <p>Please note the following important dates for admission:</p>
-    <ul>
-        <li>Application Period: January to March</li>
-        <li>Entrance Examination: April</li>
-        <li>Interview: May</li>
-        <li>Enrollment: June</li>
-    </ul>
-</div>
+        <!-- 1. Admission and Testing Schedule -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-kll-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Admission and Testing Schedule
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">For A.Y. 2026 - 2027 (KLL Main Campus)</p>
+            </div>
+            <div class="p-6 md:flex items-center justify-between gap-8">
+                <div class="md:w-1/2 text-center md:text-left mb-6 md:mb-0 border-b md:border-b-0 md:border-r border-gray-200 md:pr-8 pb-6 md:pb-0">
+                    <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Period</p>
+                    <p class="text-3xl font-extrabold text-kll-maroon">MARCH 16, 2026</p>
+                    <p class="text-xl font-bold text-gray-600 my-1">to</p>
+                    <p class="text-3xl font-extrabold text-kll-maroon">MAY 31, 2026</p>
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Activity</p>
+                    <ul class="space-y-3 font-medium text-gray-700 text-lg">
+                        <li class="flex items-start gap-2"><span class="text-kll-maroon font-bold">&bull;</span> Application</li>
+                        <li class="flex items-start gap-2"><span class="text-kll-maroon font-bold">&bull;</span> Submission of Requirements</li>
+                        <li class="flex items-start gap-2"><span class="text-kll-maroon font-bold">&bull;</span> Evaluation</li>
+                        <li class="flex items-start gap-2"><span class="text-kll-maroon font-bold">&bull;</span> Release of Examination Permit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-    <h2>Contact Information</h2>
-    <p>For more information about admission, please contact:</p>
-    <p>Admissions Office<br>
-    Kolehiyo ng Lungsod ng Lipa<br>
-    Phone: (043) 123-4567<br>
-    Email: admissions@kll.edu.ph</p>
-</div>
+        <!-- 2. Courses Offered -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Courses Offered
+                </h2>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- College of Education -->
+                <div class="border border-gray-200 rounded-lg p-4 bg-red-50/30">
+                    <h3 class="font-bold text-red-800 mb-3 text-center border-b pb-2 border-red-200">College of Education and Allied Science</h3>
+                    <ul class="space-y-2 text-sm text-gray-800">
+                        <li class="font-bold">&bull; Bachelor of Secondary Education</li>
+                        <li class="pl-4 text-gray-600">Major in: English, Mathematics, Filipino, Science, Values Education, Social Studies</li>
+                        <li class="font-bold pt-2">&bull; Bachelor of Physical Education</li>
+                        <li class="font-bold">&bull; Bachelor of Elementary Education</li>
+                    </ul>
+                </div>
+                
+                <!-- College of Business -->
+                <div class="border border-gray-200 rounded-lg p-4 bg-red-50/30">
+                    <h3 class="font-bold text-red-800 mb-3 text-center border-b pb-2 border-red-200">College of Business Administration</h3>
+                    <ul class="space-y-2 text-sm text-gray-800">
+                        <li class="font-bold">&bull; Bachelor of Science in Business Management</li>
+                        <li class="pl-4 text-gray-600">Major in: Operation Management, Financial Management, Marketing Management</li>
+                    </ul>
+                </div>
 
-<script src="navbar.js"></script>
-<script>
-window.addEventListener('scroll', function() {
-    const button = document.querySelector('.back-to-top');
-    if (window.pageYOffset > 100) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
-    }
-});
-</script>
-<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+                <!-- College of Computer Studies -->
+                <div class="border border-gray-200 rounded-lg p-4 bg-red-50/30">
+                    <h3 class="font-bold text-red-800 mb-3 text-center border-b pb-2 border-red-200">College of Computer Studies</h3>
+                    <ul class="space-y-2 text-sm text-gray-800">
+                        <li class="font-bold">&bull; Bachelor of Science in Computer Science</li>
+                        <li class="font-bold">&bull; Associate in Computer Technology <span class="font-normal text-gray-600">(2-year program)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Comm Arts, Crim Justice, Nursing -->
+                <div class="flex flex-col gap-4">
+                    <div class="border border-gray-200 rounded-lg p-3 bg-red-50/30">
+                        <h3 class="font-bold text-red-800 mb-2 text-center text-sm border-b pb-1 border-red-200">College of Communication Arts</h3>
+                        <p class="text-sm font-bold text-center text-gray-800">&bull; Bachelor of Arts in Communication</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-3 bg-red-50/30">
+                        <h3 class="font-bold text-red-800 mb-2 text-center text-sm border-b pb-1 border-red-200">College of Criminal Justice</h3>
+                        <p class="text-sm font-bold text-center text-gray-800">&bull; Bachelor of Science in Criminology</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-3 bg-red-50/30">
+                        <h3 class="font-bold text-red-800 mb-2 text-center text-sm border-b pb-1 border-red-200">College of Nursing</h3>
+                        <p class="text-sm font-bold text-center text-gray-800">&bull; Bachelor of Science in Nursing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Admission Procedure -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-kll-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    Admission Procedure
+                </h2>
+                <p class="text-sm font-bold text-kll-maroon mt-1">College Admission Test (KLL-CAT)</p>
+            </div>
+            <div class="p-6">
+                <ol class="space-y-6">
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">1</span>
+                        <p class="text-gray-700 mt-1">From the Admission and Testing Office (ATO), secure and fill out the Application form.</p>
+                    </li>
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">2</span>
+                        <p class="text-gray-700 mt-1">Submit all the required documents at (ATO) for verification.</p>
+                    </li>
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">3</span>
+                        <p class="text-gray-700 mt-1">Wait for the schedule of KLL-CAT from the ATO's assigned Personnel.</p>
+                    </li>
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">4</span>
+                        <p class="text-gray-700 mt-1">Take the test as scheduled, and wait for the announcement of the result via KLL Official facebook page.</p>
+                    </li>
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">5</span>
+                        <p class="text-gray-700 mt-1">If passed, secure the Admission Slip given to qualified applicants from the ATO.</p>
+                    </li>
+                    <li class="flex">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-kll-maroon text-white flex items-center justify-center font-bold mr-4 shadow-sm">6</span>
+                        <p class="text-gray-700 mt-1">Proceed to the Registrar's Office for enrollment as scheduled.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 4. Admission Requirements -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 overflow-hidden mb-8">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                    Admission Requirements
+                </h2>
+            </div>
+            <div class="p-6">
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> Accomplished Application Form</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> 
+                        <div>
+                            Photocopy of SHS Report Card (Form 138) - Passed, Preferably with a grade point average of 80% 
+                            <span class="font-extrabold text-red-600 ml-1">(FOR NEW ENROLLEES)</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> 
+                        <div>
+                            Photocopy of Transcript of Records (TOR) 
+                            <span class="font-extrabold text-red-600 ml-1">(FOR TRANSFEREES)</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> Photocopy of Certificate of Good Moral Character (No pending legal, moral, and ethical issues)</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> Photocopy of Birth Certificate (PSA)</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> Applicant's / Parent's Identification Card (ID)</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> 2 pcs. of 1x1 Recent ID picture with white background</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> 2 pcs. of 2x2 Recent ID picture with white background</li>
+                    <li class="flex items-start gap-2"><span class="text-gray-900 font-bold">&bull;</span> Long Brown Envelope</li>
+                </ul>
+
+                <!-- Additional Requirements for BSN -->
+                <div class="mt-8 border-t-2 border-dashed border-red-300 pt-6">
+                    <h3 class="text-xl font-extrabold text-red-700 mb-4 uppercase text-center sm:text-left">Additional Requirements for Bachelor of Science in Nursing (BSN)</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-700 font-bold">&bull;</span> 
+                            <div>
+                                Certificate of Indigency (low-income family) issued by a veritable and authorized Barangay Official, bearing official seal. 
+                                <em class="text-gray-500 block mt-1">(Note: only 1 applicant from 1 family shall be accommodated to give equal opportunities.)</em>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-700 font-bold">&bull;</span> 
+                            Certification coming from the last school attended that applicant belongs to the upper 40% of the graduating class and a GWA of 90% or above with no grades below 90%
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-700 font-bold">&bull;</span> 
+                            Proof of graduation from DepEd - accredited school, graduated from any strand at the Senior High School program.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Contact Info (Kept as supplementary from original code) -->
+        <div class="bg-gray-100 rounded-xl p-6 text-center border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Need More Information?</h2>
+            <p class="text-gray-600 mb-4">If you have any further questions regarding the admissions process, please don't hesitate to reach out.</p>
+            <div class="inline-block text-left bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-bold text-kll-maroon">Admissions and Testing Office (ATO)</p>
+                <p class="text-gray-700">Kolehiyo ng Lungsod ng Lipa</p>
+                <p class="text-gray-700 mt-2"><span class="font-semibold">Phone:</span> (043) 123-4567</p>
+                <p class="text-gray-700"><span class="font-semibold">Email:</span> admissions@kll.edu.ph</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Back to top button -->
+    <button id="backToTopBtn" class="fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hover:bg-red-900 transition-colors hidden z-50 cursor-pointer border-2 border-white" aria-label="Back to top">
+        &uarr;
+    </button>
+
+    <script>
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 200) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
