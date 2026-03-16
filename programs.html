@@ -1,101 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="styles.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programs Offered</title>
-
-<style>
-.container{
-    max-width:1100px;margin:auto;padding:30px;
-    display:grid;grid-template-columns:repeat(auto-fit, minmax(300px,1fr));gap:20px;}
-
-.card{
-    background:rgb(255, 255, 255);
-    border-radius:10px;
-    padding:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
-
-.card:hover{    transform:translateY(-5px);}
-.card h2{  color:#6d0505;  border-bottom:2px solid #db3434;  padding-bottom:8px;}
-ul{  padding-left:18px;}
-li{margin:6px 0;}
-.major{    margin-left:15px;color:#681d1d;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs Offered - Kolehiyo ng Lungsod ng Lipa</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
 <div id="navbar"></div>
-<header>
-<img src="asset/img/programsoffered.jpg" alt="Programs Offered" style="width:100%; height:auto;">
-<p>Academic Programs Available</p>
+<nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
+                <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<header class="w-full bg-gray-200 border-b-4 border-yellow-500">
+    <div class="w-full h-64 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
+        <img src="asset/img/programsoffered.jpg" alt="Programs Offered" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[Programs Banner]'">
+    </div>
 </header>
 
+<main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
+    <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6">
+        <h2 class="text-2xl font-semibold">Academic Programs Offered</h2>
+        <p class="mt-2 text-gray-600">Kolehiyo ng Lungsod ng Lipa offers a range of programs across several colleges.</p>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Education and Allied Sciences</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-800">
+                    <li>Bachelor of Secondary Education (Majors: English, Mathematics, Filipino, Science, Values Education, Social Studies)</li>
+                    <li>Bachelor of Elementary Education</li>
+                    <li>Bachelor of Physical Education</li>
+                </ul>
+            </div>
 
-<div class="container">
- <br>
-<div class="card">
-<h2>College of Education and Allied Sciences</h2>
-<ul>
-<li>Bachelor of Secondary Education</li>
-<ul class="major">
-<li>Major in English</li>
-<li>Major in Mathematics</li>
-<li>Major in Filipino</li>
-<li>Major in Science</li>
-<li>Major in Values Education</li>
-<li>Major in Social Studies</li>
-</ul>
-<li>Bachelor of Elementary Education</li>
-<li>Bachelor of Physical Education</li>
-</ul>
-</div>
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Business Administration</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-800">
+                    <li>Bachelor of Science in Business Administration</li>
+                    <li class="pl-5 text-sm text-gray-600">Majors in Financial Management, Marketing Management, Operations Management</li>
+                </ul>
+            </div>
 
-<div class="card">
-<h2>College of Computer Studies</h2>
-<ul>
-<li>Bachelor of Science in Computer Science</li>
-<li>Associate in Computer Technology (2-Year Program)</li>
-</ul>
-</div>
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Computer Studies</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-800">
+                    <li>Bachelor of Science in Computer Science</li>
+                    <li>Associate in Computer Technology (2-Year Program)</li>
+                </ul>
+            </div>
 
-<div class="card">
-<h2>College of Business Administration</h2>
-<ul>
-<li>Bachelor of Science in Business Administration</li>
-<ul class="major">
-<li>Major in Financial Management</li>
-<li>Major in Marketing Management</li>
-<li>Major in Operations Management</li>
-</ul>
-</ul>
-</div>
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Communication Arts</h3>
+                <p class="text-gray-800">Bachelor of Arts in Communication</p>
+            </div>
 
-<div class="card">
-<h2>College of Communication Arts</h2>
-<ul>
-<li>Bachelor of Arts in Communication</li>
-</ul>
-</div>
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Criminal Justice Education</h3>
+                <p class="text-gray-800">Bachelor of Science in Criminology</p>
+            </div>
 
-<div class="card">
-<h2>College of Criminal Justice Education</h2>
-<ul>
-<li>Bachelor of Science in Criminology</li>
-</ul>
-</div>
+            <div class="border border-gray-200 rounded-xl p-6 bg-red-50/40">
+                <h3 class="text-lg font-bold text-red-800 mb-2">College of Nursing</h3>
+                <p class="text-gray-800">Bachelor of Science in Nursing</p>
+            </div>
+        </div>
+    </div>
+</main>
 
-<div class="card">
-<h2>College of Nursing</h2>
-<ul>
-<li>Bachelor of Science in Nursing</li>
-</ul>
-</div>
-
-</div>
 <script src="navbar.js"></script>
 <script>
 window.addEventListener('scroll', function() {

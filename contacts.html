@@ -3,34 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Information</title>
+    <title>Contact Information - Kolehiyo ng Lungsod ng Lipa</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; }
+    </style>
 </head>
-<body>
-  <div id="navbar"></div>
-  <header>
-      <img src="asset/img/contact.jpg" alt="Contact Information" style="width:100%; height:auto;">
-  </header>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
+<div id="navbar"></div>
+<nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
+                <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+            </div>
+        </div>
+    </div>
+</nav>
 
-    <h2>Contact Information</h2>
+<header class="w-full bg-gray-200 border-b-4 border-yellow-500">
+    <div class="w-full h-64 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
+        <img src="asset/img/contact.jpg" alt="Contact Information" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[Contact Banner]'">
+    </div>
+</header>
 
-    <p><strong>Address:</strong><br>
-    Barangay Marawoy-Dagatan<br>
-    Lipa City, Batangas 4217<br>
-    Philippines
-    </p>
+<main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
+    <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6">
+        <h2 class="text-2xl font-semibold">Contact Information</h2>
+        <p class="mt-4 text-gray-700">Reach out to Kolehiyo ng Lungsod ng Lipa using the information below.</p>
 
-    <p><strong>Phone:</strong><br>
-    <a href="tel:+63439813268">(043) 981-3268</a>
-    </p>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold text-gray-800">Address</h3>
+                <p class="mt-2 text-gray-700">
+                    Barangay Marawoy-Dagatan<br>
+                    Lipa City, Batangas 4217<br>
+                    Philippines
+                </p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-800">Phone</h3>
+                <p class="mt-2"><a href="tel:+63439813268" class="text-kll-maroon underline">(043) 981-3268</a></p>
 
-    <p><strong>Facebook:</strong><br>
-    <a href="https://www.facebook.com/share/1PDqcsWT1p/" target="_blank">
-        Visit our Facebook Page
-    </a>
-    </p>
-    <script src="navbar.js"></script>
+                <h3 class="font-semibold text-gray-800 mt-6">Facebook</h3>
+                <p class="mt-2"><a href="https://www.facebook.com/share/1PDqcsWT1p/" target="_blank" class="text-kll-maroon underline">Visit our Facebook Page</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="navbar.js"></script>
 <script>
 window.addEventListener('scroll', function() {
     const button = document.querySelector('.back-to-top');

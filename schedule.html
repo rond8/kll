@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Class Schedule</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule - Kolehiyo ng Lungsod ng Lipa</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
 <div id="navbar"></div>
+<nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
+                <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+            </div>
+        </div>
+    </div>
+</nav>
 
-<header>
-    <h2 style="margin:20px 0; text-align:center;">Class Schedule</h2>
+<header class="w-full bg-gray-200 border-b-4 border-yellow-500">
+    <div class="w-full h-64 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
+        <img src="asset/img/index.jpg" alt="Class Schedule" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[Schedule Banner]'">
+    </div>
 </header>
 
-<main>
-    <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2-9Gj8YhZc56IpHbX-KJeWkU5VQinMCaYwEVy0JolOxkCamiUYq7rq4VqnLAJOxu-RyRXo4LI3eZI/pubhtml?widget=true&headers=false"
-    width="100%"
-    height="600"
-    style="border:none; max-width:100%;">
-    </iframe>
+<main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6">
+        <h2 class="text-2xl font-semibold">Class Schedule</h2>
+        <p class="mt-2 text-gray-600">View the current class schedule below.</p>
+        <div class="mt-6 overflow-hidden rounded-lg border border-gray-200">
+            <iframe
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2-9Gj8YhZc56IpHbX-KJeWkU5VQinMCaYwEVy0JolOxkCamiUYq7rq4VqnLAJOxu-RyRXo4LI3eZI/pubhtml?widget=true&headers=false"
+                width="100%"
+                height="600"
+                class="w-full"
+                style="border:none; min-height:480px;"
+            ></iframe>
+        </div>
+    </div>
 </main>
 
+<script src="navbar.js"></script>
 <script>
 window.addEventListener('scroll', function() {
     const button = document.querySelector('.back-to-top');
@@ -34,7 +61,5 @@ window.addEventListener('scroll', function() {
 });
 </script>
 <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
-
-<script src="navbar.js"></script>
 </body>
 </html>
