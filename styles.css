@@ -102,6 +102,21 @@ nav ul li a:hover{
 background:#8c0202;
 }
 
+/* Notification badge for nav items */
+.nav-badge {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #db3434;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+.nav-badge.hidden {
+  display: none;
+}
+
 /* Content */
 section{
 padding:40px;
