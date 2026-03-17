@@ -1,64 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLL Student Portal</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="student.js"></script>
-<script src="navbar.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        html { scroll-behavior: smooth; }
-        .bg-kll-maroon { background-color: #800000; }
-        .text-kll-maroon { color: #800000; }
-        .border-kll-maroon { border-color: #800000; }
-    </style>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLL Student Portal</title>
+
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
+<body>
 <div id="navbar"></div>
-<nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
-                <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
-            </div>
-        </div>
-    </div>
-</nav>
 
-<header class="w-full bg-gray-200 border-b-4 border-yellow-500">
-    <div class="w-full h-64 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
-        <img src="asset/img/studentportal.jpg" alt="Student Portal" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[Student Portal Banner]'">
-    </div>
-</header>
+<div id="login">
 
-<main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-8 max-w-md mx-auto">
-        <h2 class="text-2xl font-bold text-center text-gray-800">Student Portal Login</h2>
-        <p class="mt-2 text-center text-gray-600">Enter your student number and password to access your account.</p>
-        <div class="mt-6 space-y-4">
-            <input id="username" type="text" placeholder="Student Number" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kll-maroon" />
-            <input id="password" type="password" placeholder="Password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kll-maroon" />
-            <button onclick="login()" class="w-full py-3 bg-kll-maroon text-white font-semibold rounded-lg shadow hover:bg-red-700 transition">Login</button>
-        </div>
-        <div id="result" class="mt-4 text-sm text-center text-red-600"></div>
-    </div>
-</main>
+<h3>Student Login</h3>
 
+<input type="text" id="username" placeholder="Student Number">
 
-<script>
-window.addEventListener('scroll', function() {
-    const button = document.querySelector('.back-to-top');
-    if (window.pageYOffset > 100) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
-    }
-});
-</script>
-<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<div id="result"></div>
+
+<script src="student.js"></script>
+<script src="navbar.js"></script>
 </body>
 </html>
