@@ -1,32 +1,39 @@
 const apiURL = "https://script.google.com/macros/s/AKfycbxRc7E_7q2QyE4gTctl1LzxYW3z6YiZwuXv4PTUfgGnoyVvwLkSK6kgQU-5e5qC0O8/exec";
 
-function login() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+let currentUser = null;
+let currentPass = null;
+let isLoading = false;
+
+function login(usernameInput = null, passwordInput = null) {
+  if (isLoading) return;
+
+  const username = usernameInput || document.getElementById("username").value.trim();
+  const password = passwordInput || document.getElementById("password").value.trim();
 
   if (!username || !password) {
     document.getElementById("result").innerText = "Enter username and password";
     return;
   }
 
-  // Show logging in message
+  isLoading = true;
   document.getElementById("result").innerText = "Logging in...";
 
-  // Add timestamp to prevent caching
-  const url =
-    apiURL +
-    "?username=" +
-    encodeURIComponent(username) +
-    "&password=" +
-    encodeURIComponent(password) +
-    "&t=" + new Date().getTime();
-
-  fetch(url)
+  fetch(apiURL, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  })
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
-        // Sort by year and semester
-        data.grades.sort((a, b) => a.year - b.year || a.semester - b.semester);
+
+        currentUser = username;
+        currentPass = password;
+
+        // SORT properly
+        data.grades.sort((a, b) =>
+          Number(a.year) - Number(b.year) ||
+          Number(a.semester) - Number(b.semester)
+        );
 
         let rows = "";
         data.grades.forEach(g => {
@@ -64,30 +71,41 @@ function login() {
           </table>
 
           <br>
-          <button onclick="location.reload()">Logout</button>
+          <button onclick="logout()">Logout</button>
           <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
           <button onclick="refreshGrades()">Refresh Grades</button>
         `;
 
         document.getElementById("login").style.display = "none";
+
       } else {
         document.getElementById("result").innerText = "❌ Invalid username or password.";
       }
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       document.getElementById("result").innerText = "⚠️ Cannot connect to server.";
+    })
+    .finally(() => {
+      isLoading = false;
     });
 }
 
-// Enter key triggers login
+// ENTER KEY LOGIN
 document.getElementById("password").addEventListener("keypress", e => {
   if (e.key === "Enter") login();
 });
 
-// Refresh grades function
+// REFRESH
 function refreshGrades() {
-  if (document.getElementById("login").style.display === "none") {
-    login(); // re-fetch grades
+  if (currentUser && currentPass) {
+    login(currentUser, currentPass);
   }
 }
 
+// LOGOUT
+function logout() {
+  currentUser = null;
+  currentPass = null;
+  location.reload();
+}
