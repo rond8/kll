@@ -1,4 +1,4 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbylUtD4du2ZdrOp4e6YX5lngWcbsXYz-CPgswd-iD67NlD9qK8NW7HHHyOBHL8zQtM/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbyM_Gc1Ec0yQXQ8HUq1HXVHMrgZRzkj6JHDgbZ2Z50Kgi8R_eKcNOBt_70v17fBleg/exec";
 
 let currentUser = null;
 let currentPass = null;
@@ -18,33 +18,33 @@ function login(usernameInput = null, passwordInput = null) {
   isLoading = true;
   document.getElementById("result").innerText = "Logging in...";
 
-  // Use GET request (to avoid CORS issues)
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
     "&password=" + encodeURIComponent(password) +
-    "&t=" + Date.now(); // cache buster
+    "&t=" + Date.now();
 
   fetch(url)
     .then(res => res.json())
     .then(data => {
+      console.log("API response:", data);
+
       if (data.status === "success") {
         currentUser = username;
         currentPass = password;
 
         // Sort grades by year and semester
-        data.grades.sort((a, b) => {
-          // Sorting by year string order - define year order map:
-          const yearOrder = {
-            "1st year": 1,
-            "2nd year": 2,
-            "3rd year": 3,
-            "4th year": 4
-          };
+        const yearOrder = {
+          "1st year": 1,
+          "2nd year": 2,
+          "3rd year": 3,
+          "4th year": 4
+        };
 
+        data.grades.sort((a, b) => {
           return (yearOrder[a.year] || 99) - (yearOrder[b.year] || 99) || (a.semester - b.semester);
         });
 
-        // Group grades by year string
+        // Group by year
         const grouped = {
           "1st year": [],
           "2nd year": [],
@@ -56,7 +56,6 @@ function login(usernameInput = null, passwordInput = null) {
           if (grouped[g.year]) grouped[g.year].push(g);
         });
 
-        // Build result HTML
         let html = `
           <h2>${data.name}</h2>
           <p><strong>Course:</strong> ${data.course}</p>
@@ -103,7 +102,10 @@ function login(usernameInput = null, passwordInput = null) {
         html += renderYear("3rd year", "🎓 Third Year");
         html += renderYear("4th year", "🎓 Fourth Year");
 
-        // Buttons
+        if (data.grades.length === 0) {
+          html += `<p><em>No grades available yet.</em></p>`;
+        }
+
         html += `
           <button onclick="logout()">Logout</button>
           <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
