@@ -18,13 +18,13 @@ function login(usernameInput = null, passwordInput = null) {
   isLoading = true;
   document.getElementById("result").innerText = "Logging in...";
 
-  fetch(apiURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ username, password })
-  })
+  // ✅ USE GET (NO CORS ISSUE)
+  const url = apiURL +
+    "?username=" + encodeURIComponent(username) +
+    "&password=" + encodeURIComponent(password) +
+    "&t=" + Date.now(); // prevent caching
+
+  fetch(url)
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
@@ -32,20 +32,26 @@ function login(usernameInput = null, passwordInput = null) {
         currentUser = username;
         currentPass = password;
 
-        // SORT
+        // 🔹 SORT
         data.grades.sort((a, b) =>
           Number(a.year) - Number(b.year) ||
           Number(a.semester) - Number(b.semester)
         );
 
-        // GROUP BY YEAR
-        const grouped = { 1: [], 2: [], 3: [], 4: [] };
+        // 🔹 GROUP BY YEAR
+        const grouped = {
+          1: [],
+          2: [],
+          3: [],
+          4: []
+        };
 
         data.grades.forEach(g => {
           const yr = Number(g.year);
           if (grouped[yr]) grouped[yr].push(g);
         });
 
+        // 🔹 BUILD UI
         let html = `
           <h2>${data.name}</h2>
           <p><strong>Course:</strong> ${data.course}</p>
@@ -88,6 +94,7 @@ function login(usernameInput = null, passwordInput = null) {
         html += renderYear(3, "🎓 Third Year");
         html += renderYear(4, "🎓 Fourth Year");
 
+        // 🔹 BUTTONS
         html += `
           <button onclick="logout()">Logout</button>
           <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
@@ -110,19 +117,21 @@ function login(usernameInput = null, passwordInput = null) {
     });
 }
 
-// ENTER KEY
+// 🔹 ENTER KEY LOGIN
 document.getElementById("password").addEventListener("keypress", e => {
   if (e.key === "Enter") login();
 });
 
-// REFRESH
+// 🔹 REFRESH
 function refreshGrades() {
   if (currentUser && currentPass) {
     login(currentUser, currentPass);
   }
 }
 
-// LOGOUT
+// 🔹 LOGOUT
 function logout() {
+  currentUser = null;
+  currentPass = null;
   location.reload();
 }
