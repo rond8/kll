@@ -1,4 +1,4 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbxTatK7hW8rsYQmcDxUE27c9gr_obhcZeBC5MpcrHGJsSGZFdAjoOTMBDc9mL_RscM/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbw7wGp9i_-RWwbUB0oAu4XvBgHzEUMepboWo9plOP1gNOESI_PSumG_mKEhXXjbRQQ/exec";
 
 let currentUser = null;
 let currentPass = null;
@@ -32,7 +32,6 @@ function login(usernameInput = null, passwordInput = null) {
         currentUser = username;
         currentPass = password;
 
-        // Sort grades by year and semester
         const yearOrder = {
           "1st year": 1,
           "2nd year": 2,
@@ -40,11 +39,11 @@ function login(usernameInput = null, passwordInput = null) {
           "4th year": 4
         };
 
-        data.grades.sort((a, b) => {
-          return (yearOrder[a.year] || 99) - (yearOrder[b.year] || 99) || (a.semester - b.semester);
-        });
+        data.grades.sort((a, b) => (
+          (yearOrder[a.year] || 99) - (yearOrder[b.year] || 99)
+            || (a.semester - b.semester)
+        ));
 
-        // Group by year
         const grouped = {
           "1st year": [],
           "2nd year": [],
@@ -79,7 +78,7 @@ function login(usernameInput = null, passwordInput = null) {
 
           return `
             <h3>${label}</h3>
-            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+            <table border="1" cellpadding="5" cellspacing="0">
               <thead>
                 <tr>
                   <th>Semester</th>
@@ -114,7 +113,6 @@ function login(usernameInput = null, passwordInput = null) {
 
         document.getElementById("result").innerHTML = html;
         document.getElementById("login").style.display = "none";
-
       } else {
         document.getElementById("result").innerText = "❌ Invalid username or password.";
       }
