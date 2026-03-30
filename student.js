@@ -1,4 +1,4 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbyM_Gc1Ec0yQXQ8HUq1HXVHMrgZRzkj6JHDgbZ2Z50Kgi8R_eKcNOBt_70v17fBleg/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbylUtD4du2ZdrOp4e6YX5lngWcbsXYz-CPgswd-iD67NlD9qK8NW7HHHyOBHL8zQtM/exec";
 
 let currentUser = null;
 let currentPass = null;
@@ -18,50 +18,55 @@ function login(usernameInput = null, passwordInput = null) {
   isLoading = true;
   document.getElementById("result").innerText = "Logging in...";
 
-  // ✅ USE GET (NO CORS ISSUE)
+  // Use GET request (to avoid CORS issues)
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
     "&password=" + encodeURIComponent(password) +
-    "&t=" + Date.now(); // prevent caching
+    "&t=" + Date.now(); // cache buster
 
   fetch(url)
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
-
         currentUser = username;
         currentPass = password;
 
-        // 🔹 SORT
-        data.grades.sort((a, b) =>
-          Number(a.year) - Number(b.year) ||
-          Number(a.semester) - Number(b.semester)
-        );
+        // Sort grades by year and semester
+        data.grades.sort((a, b) => {
+          // Sorting by year string order - define year order map:
+          const yearOrder = {
+            "1st year": 1,
+            "2nd year": 2,
+            "3rd year": 3,
+            "4th year": 4
+          };
 
-        // 🔹 GROUP BY YEAR
+          return (yearOrder[a.year] || 99) - (yearOrder[b.year] || 99) || (a.semester - b.semester);
+        });
+
+        // Group grades by year string
         const grouped = {
-          1: [],
-          2: [],
-          3: [],
-          4: []
+          "1st year": [],
+          "2nd year": [],
+          "3rd year": [],
+          "4th year": []
         };
 
         data.grades.forEach(g => {
-          const yr = Number(g.year);
-          if (grouped[yr]) grouped[yr].push(g);
+          if (grouped[g.year]) grouped[g.year].push(g);
         });
 
-        // 🔹 BUILD UI
+        // Build result HTML
         let html = `
           <h2>${data.name}</h2>
           <p><strong>Course:</strong> ${data.course}</p>
         `;
 
-        function renderYear(year, label) {
-          if (grouped[year].length === 0) return "";
+        function renderYear(yearKey, label) {
+          if (!grouped[yearKey] || grouped[yearKey].length === 0) return "";
 
           let rows = "";
-          grouped[year].forEach(g => {
+          grouped[yearKey].forEach(g => {
             rows += `
               <tr>
                 <td>${g.semester}</td>
@@ -75,26 +80,30 @@ function login(usernameInput = null, passwordInput = null) {
 
           return `
             <h3>${label}</h3>
-            <table border="1" cellpadding="5">
-              <tr>
-                <th>Semester</th>
-                <th>Course Code</th>
-                <th>Subject</th>
-                <th>Teacher</th>
-                <th>Grade</th>
-              </tr>
-              ${rows}
+            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Semester</th>
+                  <th>Course Code</th>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+              </tbody>
             </table>
             <br>
           `;
         }
 
-        html += renderYear(1, "🎓 First Year");
-        html += renderYear(2, "🎓 Second Year");
-        html += renderYear(3, "🎓 Third Year");
-        html += renderYear(4, "🎓 Fourth Year");
+        html += renderYear("1st year", "🎓 First Year");
+        html += renderYear("2nd year", "🎓 Second Year");
+        html += renderYear("3rd year", "🎓 Third Year");
+        html += renderYear("4th year", "🎓 Fourth Year");
 
-        // 🔹 BUTTONS
+        // Buttons
         html += `
           <button onclick="logout()">Logout</button>
           <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
@@ -117,19 +126,16 @@ function login(usernameInput = null, passwordInput = null) {
     });
 }
 
-// 🔹 ENTER KEY LOGIN
 document.getElementById("password").addEventListener("keypress", e => {
   if (e.key === "Enter") login();
 });
 
-// 🔹 REFRESH
 function refreshGrades() {
   if (currentUser && currentPass) {
     login(currentUser, currentPass);
   }
 }
 
-// 🔹 LOGOUT
 function logout() {
   currentUser = null;
   currentPass = null;
