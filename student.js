@@ -1,4 +1,4 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbxRc7E_7q2QyE4gTctl1LzxYW3z6YiZwuXv4PTUfgGnoyVvwLkSK6kgQU-5e5qC0O8/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbxhAkwYwx17v6VSLfe8e448QBnIDdxm1mD6knfb6_4sJ41WwYeBzUcYtxlDec3A1Qo/exec";
 
 let currentUser = null;
 let currentPass = null;
