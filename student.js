@@ -1,8 +1,18 @@
+// student.js
+
 const apiURL = "https://script.google.com/macros/s/AKfycbw7wGp9i_-RWwbUB0oAu4XvBgHzEUMepboWo9plOP1gNOESI_PSumG_mKEhXXjbRQQ/exec";
 
 let currentUser = null;
 let currentPass = null;
 let isLoading = false;
+
+// Map numeric years to display strings
+const yearMap = {
+  1: "1st year",
+  2: "2nd year",
+  3: "3rd year",
+  4: "4th year"
+};
 
 function login(usernameInput = null, passwordInput = null) {
   if (isLoading) return;
@@ -32,18 +42,10 @@ function login(usernameInput = null, passwordInput = null) {
         currentUser = username;
         currentPass = password;
 
-        const yearOrder = {
-          "1st year": 1,
-          "2nd year": 2,
-          "3rd year": 3,
-          "4th year": 4
-        };
+        // Sort grades by year and semester
+        data.grades.sort((a, b) => a.year - b.year || a.semester - b.semester);
 
-        data.grades.sort((a, b) => (
-          (yearOrder[a.year] || 99) - (yearOrder[b.year] || 99)
-            || (a.semester - b.semester)
-        ));
-
+        // Group grades by year
         const grouped = {
           "1st year": [],
           "2nd year": [],
@@ -52,7 +54,8 @@ function login(usernameInput = null, passwordInput = null) {
         };
 
         data.grades.forEach(g => {
-          if (grouped[g.year]) grouped[g.year].push(g);
+          const yearKey = yearMap[g.year] || "Unknown year";
+          if (grouped[yearKey]) grouped[yearKey].push(g);
         });
 
         let html = `
@@ -78,7 +81,7 @@ function login(usernameInput = null, passwordInput = null) {
 
           return `
             <h3>${label}</h3>
-            <table border="1" cellpadding="5" cellspacing="0">
+            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
               <thead>
                 <tr>
                   <th>Semester</th>
@@ -113,6 +116,7 @@ function login(usernameInput = null, passwordInput = null) {
 
         document.getElementById("result").innerHTML = html;
         document.getElementById("login").style.display = "none";
+
       } else {
         document.getElementById("result").innerText = "❌ Invalid username or password.";
       }
@@ -126,16 +130,19 @@ function login(usernameInput = null, passwordInput = null) {
     });
 }
 
+// Press Enter to login
 document.getElementById("password").addEventListener("keypress", e => {
   if (e.key === "Enter") login();
 });
 
+// Refresh grades for current user
 function refreshGrades() {
   if (currentUser && currentPass) {
     login(currentUser, currentPass);
   }
 }
 
+// Logout
 function logout() {
   currentUser = null;
   currentPass = null;
