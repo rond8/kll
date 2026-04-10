@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Data Structures and Algorithms",
+    "author": "Narasimha Karumanchi",
+    "category": "Computer Science",
+    "status": "Available"
+  },
+  {
+    "title": "HTML and CSS: Design and Build Websites",
+    "author": "Jon Duckett",
+    "category": "Web Development",
+    "status": "Available"
+  },
+  {
+    "title": "Java: The Complete Reference",
+    "author": "Herbert Schildt",
+    "category": "Programming",
+    "status": "Borrowed"
+  },
+  {
+    "title": "Computer Networking",
+    "author": "James Kurose",
+    "category": "Networking",
+    "status": "Available"
+  }
+]
