@@ -86,7 +86,6 @@
     const loginForm = document.querySelector('form');
     const loginBtn = loginForm.querySelector('button[type="submit"]');
     
-    // REPLACE THIS URL with your Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi8us5YIkzkM-Lc_9ioSNTiWBZqZa0HnrGQJl2L-d0V9aUV1K1XUMENWKRK7kb2wk/exec";
 
     loginForm.addEventListener('submit', function(e) {
@@ -106,12 +105,7 @@
             body: JSON.stringify(formData)
         })
         .then(() => {
-            // Because 'no-cors' doesn't return a body we can read easily, 
-            // for a simple hobby project, we usually handle logic via a 
-            // redirect or use a more advanced CORS setup.
-            
-            // SIMPLIFIED LOGIC: In a real production app, you'd use a 
-            // proper backend, but for this Vercel site:
+       
             alert("Checking credentials... if correct, you will be redirected.");
             window.location.href = "admin-dashboard.html"; 
         })
