@@ -86,7 +86,7 @@
     const loginForm = document.querySelector('form');
     const loginBtn = loginForm.querySelector('button[type="submit"]');
     
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi8us5YIkzkM-Lc_9ioSNTiWBZqZa0HnrGQJl2L-d0V9aUV1K1XUMENWKRK7kb2wk/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFd8OApFW5nPj2HPl7H3FNu8Ku8TI-lfeu3bkownvUVY-5uW3sbL8neZytUZp0Zbo/exec";
 
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -98,24 +98,23 @@
             username: id('username').value,
             password: id('password').value
         };
-
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Note: Google Apps Script requires careful handling
-            body: JSON.stringify(formData)
-        })
-        .then(() => {
-       
-            alert("Checking credentials... if correct, you will be redirected.");
-            window.location.href = "admin-dashboard.html"; 
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            alert("Connection error. Please try again.");
-            loginBtn.disabled = false;
-            loginBtn.innerText = "Log In";
-        });
-    });
+fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new FormData(loginForm) // Sending as FormData is easier for GAS
+})
+.then(response => response.json()) // We need to read the JSON response
+.then(data => {
+    if (data.status === "success") {
+        window.location.href = "admin-dashboard.html";
+    } else {
+        alert("Access Denied: " + data.message);
+        loginBtn.disabled = false;
+        loginBtn.innerText = "Log In";
+    }
+})
+.catch(error => {
+    alert("Connection error.");
+});
 
     function id(name) { return document.getElementById(name); }
 </script>
