@@ -84,7 +84,7 @@
     const loginForm = document.getElementById('loginForm');
     const loginBtn = document.getElementById('loginBtn');
     
-    // Your Google Apps Script Web App URL
+  
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxliUt1sngLkMLjzwzsQuZ2gqwRxPAOEOVk_gnpTDW9tDjBvEsAL0zqbNZtK3-BQ8s/exec";
 
     loginForm.addEventListener('submit', function(e) {
@@ -97,20 +97,17 @@
         // Create FormData directly from the form
         const payload = new FormData(loginForm);
 
-        fetch(SCRIPT_URL, {
+fetch(SCRIPT_URL, {
             method: 'POST',
             body: payload
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.status === "success" || data.result === "success") {
-                // Success! Redirect to dashboard
+                // SET THE SESSION KEY BEFORE REDIRECTING
+                sessionStorage.setItem('isLoggedIn', 'true');
                 window.location.href = "admin-dashboard.html";
             } else {
-                // Failed login
                 alert("Access Denied: " + (data.message || "Invalid credentials"));
                 resetButton();
             }
