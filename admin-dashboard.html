@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KLL Admin Dashboard</title>
+
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'admin-login.html'; 
+        }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -32,10 +39,10 @@
             <a href="#" class="sidebar-link active-link flex items-center py-3 px-6 transition">
                 <i class="fas fa-chart-line w-6"></i> Dashboard
             </a>
-            <a href="https://www.dropbox.com/scl/fi/53yy17muuqq3e4b0pm3i4/announce.txt?rlkey=fp2sr8w7q160rsrur9fqaqfbb&st=s7ec95h9&dl=0" class="sidebar-link flex items-center py-3 px-6 transition">
+            <a href="#" class="sidebar-link flex items-center py-3 px-6 transition">
                 <i class="fas fa-bullhorn w-6"></i> Announcements
             </a>
-            <a href="https://docs.google.com/spreadsheets/d/1LpzdEk6IswxmsEKVe1EQblYVYpuE7u4jrREtvXurxNw/edit?usp=sharing" class="sidebar-link flex items-center py-3 px-6 transition">
+            <a href="#" class="sidebar-link flex items-center py-3 px-6 transition">
                 <i class="fas fa-users w-6"></i> Student Records
             </a>
    
@@ -53,7 +60,6 @@
                 <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-
             </div>
             
             <div class="flex items-center gap-4">
@@ -70,41 +76,24 @@
 
         <main class="p-4 md:p-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800 transform hover:-translate-y-1 transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
                     <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
                     <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500 transform hover:-translate-y-1 transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
                     <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
                     <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-blue-500 transform hover:-translate-y-1 transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-blue-500">
                     <p class="text-gray-500 text-xs font-bold uppercase">Enrollment Records</p>
                     <p id="stat-enrollments" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
                 </div>
             </div>
 
-                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md border border-gray-100 overflow-hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-bold text-gray-800">Recent Student Activity</h2>
-                        <button class="text-xs bg-gray-100 hover:bg-gray-200 py-1 px-3 rounded-full font-bold">View All</button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead class="bg-gray-50">
-                                <tr class="text-gray-400 text-xs uppercase">
-                                    <th class="px-4 py-3 font-bold">Student Name</th>
-                                    <th class="px-4 py-3 font-bold">Category</th>
-                                    <th class="px-4 py-3 font-bold text-right">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="activity-table-body" class="text-sm divide-y">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Live Activity</h2>
+                <p class="text-gray-500 text-sm italic">Monitoring system active...</p>
             </div>
-            
         </main>
     </div>
     <script src="admin.js"></script>
