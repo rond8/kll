@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLL Collegiate Calendar 2025-2026</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; }
+        header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+        h1 { font-size: 1.5em; margin-bottom: 5px; }
+        h2 { font-size: 1.2em; text-transform: uppercase; margin-top: 0; }
+        .calendar-section { margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .holiday-list, .college-days { background: #f9f9f9; padding: 15px; border-left: 5px solid #0056b3; }
+        footer { margin-top: 30px; font-size: 0.9em; text-align: center; border-top: 1px solid #ccc; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>Republic of the Philippines<br>Lipa City</p>
+        <h1>KOLEHIYO NG LUNGSOD NG LIPA</h1>
+        <p>Marawoy, Lipa City, Batangas</p>
+        <h2>Office of the College Registrar</h2>
+        <h3>COLLEGIATE CALENDAR FOR AY 2025 – 2026</h3>
+    </header>
+
+    <div class="calendar-section">
+        <h3>First Semester (AY 2025-2026)</h3>
+        <table>
+            <tr><th>Date</th><th>Activity</th></tr>
+            <tr><td>July 21 – Aug 19, 2025</td><td>Enrollment for 1st Semester</td></tr>
+            <tr><td>August 26, 2025</td><td>Opening of Classes</td></tr>
+            <tr><td>August 29, 2025</td><td>Schedule of Adding/Changing/Dropping of Subjects</td></tr>
+            <tr><td>October 15 – 17, 2025</td><td>Midterm Examination</td></tr>
+            <tr><td>November 24 – 28, 2025</td><td>Biglakasan 2025</td></tr>
+            <tr><td>January 06 – 08, 2026</td><td>Final Examination</td></tr>
+            <tr><td>Dec 23, 2025 – Feb 01, 2026</td><td>Christmas Vacation and Semestral Vacation</td></tr>
+            <tr><td>January 15, 2026</td><td>Release of Classcards</td></tr>
+        </table>
+    </div>
+
+    <div class="calendar-section">
+        <h3>Second Semester (AY 2025-2026)</h3>
+        <table>
+            <tr><th>Date</th><th>Activity</th></tr>
+            <tr><td>Jan 16 – Jan 30, 2026</td><td>Enrollment for 2nd Semester</td></tr>
+            <tr><td>February 02, 2026</td><td>Opening of Classes (2nd Semester)</td></tr>
+            <tr><td>March 18 – 20, 2026</td><td>Midterm Examination</td></tr>
+            <tr><td>May 11 – 12, 2026</td><td>Final Examination (Graduating Students)</td></tr>
+            <tr><td>June 03 – 05, 2026</td><td>Final Examination (Undergraduates)</td></tr>
+            <tr><td>June 06 – July 26, 2026</td><td>Summer Vacation</td></tr>
+            <tr><td>June 29, 2026</td><td>Graduation (Tentative)</td></tr>
+            <tr><td>June 25, 2026</td><td>Release of Classcards</td></tr>
+        </table>
+    </div>
+
+    <div class="college-days">
+        <h3>College Days</h3>
+        <ul>
+            <li><strong>Nursing:</strong> Oct 23-25, 2025</li>
+            <li><strong>Communication Arts:</strong> Oct 28-30, 2025</li>
+            <li><strong>Education and Allied Sciences:</strong> Oct 27-29, 2025</li>
+            <li><strong>Computer Studies:</strong> Nov 05-07, 2025</li>
+            <li><strong>Business Administration:</strong> Nov 12-14, 2025</li>
+            <li><strong>Criminal Justice Education:</strong> March 25-27, 2026</li>
+        </ul>
+    </div>
+
+    <div class="holiday-list" style="margin-top: 20px;">
+        <h3>Holidays</h3>
+        <p>August 30: National Heroes Day | Nov 01: All Saint's Day | Nov 30: Bonifacio Day | Dec 25: Christmas Day | Jan 01: New Year's Day | April 09: Araw ng Kagitingan | May 01: Labor Day</p>
+    </div>
+
+    <footer>
+        <p>Telephone No. 0994-464-3324 | Gmail: registrar.kll.lipa@gmail.com</p>
+    </footer>
+
+</body>
+</html>
