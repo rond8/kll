@@ -11,7 +11,7 @@
             scroll-behavior: smooth;
         }
         .bg-kll-maroon {
-            background-color: #800000; /* KLL maroon color */
+            background-color: #800000;
         }
         .text-kll-maroon {
             color: #800000;
@@ -27,10 +27,12 @@
     <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner">KLL</div>
-                    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
-                </div>
+             <div class="flex items-center gap-3">
+    <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
+        <img src="asset/img/schoolicon.jpg" alt="KLL Logo" class="w-full h-full object-cover">
+    </div>
+    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+</div>
             </div>
         </div>
     </nav>
@@ -44,17 +46,47 @@
 
 
     <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
-        
-      
-        <div class="text-center py-4">
+          
+         <div class="text-center py-3">     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
+                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
+                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+             <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
+                    <p id="stat-active-courses" class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
+                </div></div>
+        <div class="text-left py-4">
             <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">
                 View Announcements
             </button>
               <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'CollCalendar.html';">
           KLL Collegiate Calendar
             </button>
+                       <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'student_login.html';">
+        STUDENT PORTAL
+            </button>
+             <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" 
+             onclick="window.location.href = 'facilities.html';">
+      FACILITIES 
+            </button>
+              <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" 
+             onclick="window.location.href = 'e-library.html';">
+E-library
+            </button>
+               <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" 
+             onclick="window.location.href = 'gallery.html';">
+GALLERY
+            </button>
+           
         </div>
     </main>
+
+<div class="sha1"></div>
 
     <!-- Daily Inspiration Section (API Driven) -->
 <div class="max-w-4xl mx-auto mb-8">
@@ -97,13 +129,13 @@
         </div>
     </div>
 
-    <!-- Script inclusions as per original design -->
+
     <script src="alert.js"></script>
     <script src="navbar.js"></script>
     <script src="js/animation.js"></script>
-    
+      <script src="admin.js"></script>
     <script>
-        // Scroll Logic for Back-to-Top Button
+
         window.addEventListener('scroll', function() {
             const button = document.querySelector('.back-to-top');
             if (window.pageYOffset > 100) {
