@@ -417,3 +417,72 @@ margin:20px auto;
 .back-to-top:hover {
     background: #8c0202;
 }
+/* --- RESPONSIVE GEOMETRIC LOGO --- */
+.logo-body-wrapper {
+    width: 100%;
+    max-width: 800px; /* Limits size on large desktops */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.parent-logo {
+    display: grid;
+    /* Uses container width (%) to determine cell size */
+    grid-template-columns: repeat(9, 1fr); 
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 1%;
+    /* Maintain a consistent shape regardless of screen size */
+    width: 100%;
+    aspect-ratio: 9 / 5; 
+    transform: skewX(-5deg);
+}
+
+.d-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    /* Font size scales based on logo width */
+    font-size: 1.5vw; 
+    text-align: center;
+    z-index: 1;
+}
+
+/* On very small screens, make font slightly larger so it stays readable */
+@media (max-width: 640px) {
+    .d-box { font-size: 2.5vw; }
+}
+/* On very large screens, cap the font size */
+@media (min-width: 1024px) {
+    .d-box { font-size: 14px; }
+}
+
+.d-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #800000;
+    z-index: -1;
+    transition: background-color 0.3s ease;
+}
+
+.text-inner { transform: skewX(5deg); padding: 2px; line-height: 1; }
+
+/* Polygon shapes stay responsive because percentages are relative to the cell */
+.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+
+/* Grid areas remain the same */
+.k-stem { grid-area: 1 / 1 / 6 / 2; }
+.k-top  { grid-area: 1 / 2 / 4 / 3; }
+.k-bot  { grid-area: 3 / 2 / 6 / 3; }
+.l1-stem { grid-area: 1 / 4 / 6 / 5; }
+.l1-base { grid-area: 5 / 5 / 6 / 6; }
+.l2-stem { grid-area: 1 / 7 / 6 / 8; }
+.l2-base { grid-area: 5 / 8 / 6 / 9; }
