@@ -12,29 +12,22 @@
         .text-kll-maroon { color: #800000; }
         .border-kll-maroon { border-color: #800000; }
 
-        /* --- RESPONSIVE GEOMETRIC LOGO CSS --- */
+        /* --- GEOMETRIC LOGO CSS --- */
         .logo-body-wrapper {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
             display: flex;
             justify-content: center;
-            /* Smooth transition for the JS background change */
+            padding: 2rem 0;
+            overflow-x: auto;
+            /* ADDED: Smooth transition for the background change */
             transition: background-color 0.5s ease, border-radius 0.5s ease;
-            background-color: transparent;
         }
-
         .parent-logo {
             display: grid;
-            grid-template-columns: repeat(9, 1fr); 
-            grid-template-rows: repeat(5, 1fr);
-            grid-column-gap: 1%;
-            width: 100%;
-            aspect-ratio: 9 / 5; 
+            grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); 
+            grid-template-rows: repeat(5, clamp(40px, 8vw, 70px));
+            grid-column-gap: 8px;
             transform: skewX(-5deg);
         }
-
         .d-box {
             position: relative;
             display: flex;
@@ -42,40 +35,31 @@
             align-items: center;
             color: white;
             font-weight: bold;
-            font-size: 1.6vw; 
+            font-size: clamp(8px, 1.5vw, 12px);
             text-align: center;
             z-index: 1;
+            /* ADDED: Pointer cursor and hover transition */
             cursor: pointer;
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.2s ease;
         }
-
-        /* Responsive Text Scaling */
-        @media (max-width: 640px) { .d-box { font-size: 2.8vw; } }
-        @media (min-width: 1024px) { .d-box { font-size: 16px; } }
-
         .d-box:hover {
-            transform: scale(1.05) translateY(-5px);
-            filter: brightness(1.2);
+            transform: scale(1.05);
             z-index: 10;
         }
-
         .d-box::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: #800000;
             z-index: -1;
+            transition: background-color 0.3s ease;
         }
-
-        .text-inner { transform: skewX(5deg); padding: 4px; line-height: 1.1; }
-
-        /* Polygon shapes */
+        .text-inner { transform: skewX(5deg); padding: 2px; }
         .slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
         .slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
         .straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
         .base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
 
-        /* Grid Placement */
         .k-stem { grid-area: 1 / 1 / 6 / 2; }
         .k-top  { grid-area: 1 / 2 / 4 / 3; }
         .k-bot  { grid-area: 3 / 2 / 6 / 3; }
@@ -87,6 +71,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
+    <div id="navbar"></div>
     <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -107,52 +92,64 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800 text-center">
-                <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
-                <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500 text-center">
-                <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
-                <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500 text-center">
-                <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
-                <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
+        <div class="text-center py-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
+                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
+                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
+                    <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
+                </div>
             </div>
         </div>
 
-        <section class="logo-body-wrapper" id="dynamic-logo-section">
-            <div class="parent-logo">
-                <div class="k-stem d-box straight" onclick="window.location.href='about.html';"><div class="text-inner">ABOUT</div></div>
-                <div class="k-top d-box slant-left" onclick="window.location.href='kll-info.html';"><div class="text-inner">E</div></div>
-                <div class="k-bot d-box slant-right" onclick="window.location.href='pride.html';"><div class="text-inner">PRIDE</div></div>
-                
-                <div class="l1-stem d-box straight" onclick="window.location.href='student_login.html';"><div class="text-inner">STUDENT PORTAL</div></div>
-                <div class="l1-base d-box base" onclick="window.location.href='admission.html';"><div class="text-inner">GO</div></div>
-                
-                <div class="l2-stem d-box straight" onclick="window.location.href='e-library.html';"><div class="text-inner">E LIBRARY</div></div>
-                <div class="l2-base d-box base" onclick="window.location.href='contact.html';"><div class="text-inner">END</div></div>
-            </div>
-        </section>
+        <div class="text-left py-4">
+            <section class="logo-body-wrapper" id="dynamic-logo-section">
+                <div class="parent-logo">
+                    <div class="k-stem d-box straight" onclick="window.location.href='about.html';"><div class="text-inner">ABOUT</div></div>
+                    <div class="k-top d-box slant-left" onclick="window.location.href='kll-info.html';"><div class="text-inner">E</div></div>
+                    <div class="k-bot d-box slant-right" onclick="window.location.href='pride.html';"><div class="text-inner">PRIDE</div></div>
+                    <div class="l1-stem d-box straight" onclick="window.location.href='student_login.html';"><div class="text-inner">STUDENT PORTAL</div></div>
+                    <div class="l1-base d-box base" onclick="window.location.href='admission.html';"><div class="text-inner">GO</div></div>
+                    <div class="l2-stem d-box straight" onclick="window.location.href='eLibrary.html';"><div class="text-inner">E LIBRARY</div></div>
+                    <div class="l2-base d-box base" onclick="window.location.href='contact.html';"><div class="text-inner">END</div></div>
+                </div>
+            </section>
 
-        <div class="flex flex-wrap gap-4 justify-center py-4">
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105" onclick="window.location.href = 'announcements.html';">View Announcements</button>
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105" onclick="window.location.href = 'CollCalendar.html';">Collegiate Calendar</button>
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105" onclick="window.location.href = 'facilities.html';">Facilities</button>
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105" onclick="window.location.href = 'gallery.html';">Gallery</button>
+            <div class="flex flex-wrap gap-3 mt-6">
+                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">View Announcements</button>
+                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'CollCalendar.html';">KLL Collegiate Calendar</button>
+                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'facilities.html';">FACILITIES</button>
+                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'gallery.html';">GALLERY</button>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white text-center py-6">
+    <div class="max-w-4xl mx-auto mb-8 px-4">
+        <div class="bg-white border-l-8 border-yellow-500 rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center gap-6">
+            <div class="text-4xl">💡</div>
+            <div>
+                <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400">Daily Inspiration for KLLians</h3>
+                <p id="inspiration-text" class="text-xl text-kll-maroon font-serif italic mt-1">Loading wisdom...</p>
+                <button onclick="fetchInspiration()" class="mt-3 text-xs text-yellow-600 hover:underline font-bold">Get New Advice →</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-8">
         <p>&copy; 2026 Kolehiyo ng Lungsod ng Lipa</p>
         <div class="mt-4">
             <a href="admin-login.html" class="text-gray-500 hover:text-white text-xs transition">Administrator Login</a>
         </div>
     </footer>
 
-    <button class="back-to-top fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hidden z-50 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <button class="back-to-top fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hidden z-50 cursor-pointer border-2 border-white" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
         &uarr;
     </button>
 
@@ -160,14 +157,11 @@
     <script src="navbar.js"></script>
     <script src="js/animation.js"></script>
     <script src="admin.js"></script>
-    
     <script src="logoHover.js"></script>
-
     <script>
-        // Back to Top button visibility logic
         window.addEventListener('scroll', function() {
-            const btn = document.querySelector('.back-to-top');
-            window.pageYOffset > 100 ? btn.classList.remove('hidden') : btn.classList.add('hidden');
+            const button = document.querySelector('.back-to-top');
+            window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
         });
     </script>
 </body>
