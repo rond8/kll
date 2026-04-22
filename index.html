@@ -6,19 +6,61 @@
     <title>KLL EDUCATIONAL SITE</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        html {
-            scroll-behavior: smooth;
+ <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; }
+
+        /* --- GEOMETRIC LOGO CSS --- */
+        .logo-body-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+            overflow-x: auto; /* Prevents mobile overflow */
         }
-        .bg-kll-maroon {
+        .parent-logo {
+            display: grid;
+            /* Using clamp to make the logo responsive */
+            grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); 
+            grid-template-rows: repeat(5, clamp(40px, 8vw, 70px));
+            grid-column-gap: 8px;
+            transform: skewX(-5deg);
+        }
+        .d-box {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(8px, 1.5vw, 12px);
+            text-align: center;
+            z-index: 1;
+        }
+        .d-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: #800000;
+            z-index: -1;
+            transition: background-color 0.3s ease;
         }
-        .text-kll-maroon {
-            color: #800000;
-        }
-        .border-kll-maroon {
-            border-color: #800000;
-        }
+        .text-inner { transform: skewX(5deg); padding: 2px; }
+        .slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+        .slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+        .straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+        .base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+
+        .k-stem { grid-area: 1 / 1 / 6 / 2; }
+        .k-top  { grid-area: 1 / 2 / 4 / 3; }
+        .k-bot  { grid-area: 3 / 2 / 6 / 3; }
+        .l1-stem { grid-area: 1 / 4 / 6 / 5; }
+        .l1-base { grid-area: 5 / 5 / 6 / 6; }
+        .l2-stem { grid-area: 1 / 7 / 6 / 8; }
+        .l2-base { grid-area: 5 / 8 / 6 / 9; }
+
+        
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -61,6 +103,20 @@
                     <p id="stat-active-courses" class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
                 </div></div>
         <div class="text-left py-4">
+                 
+   <section class="logo-body-wrapper">
+    <div class="parent-logo">
+        <div class="k-stem d-box straight"><div class="text-inner">ABOUT</div></div>
+        <div class="k-top d-box slant-left"><div class="text-inner">KLL</div></div>
+        <div class="k-bot d-box slant-right"><div class="text-inner">PRIDE</div></div>
+        
+        <div class="l1-stem d-box straight"><div class="text-inner">LEARN</div></div>
+        <div class="l1-base d-box base"><div class="text-inner">GO</div></div>
+        
+        <div class="l2-stem d-box straight"><div class="text-inner">LEAD</div></div>
+        <div class="l2-base d-box base"><div class="text-inner">END</div></div>
+    </div>
+</section>
             <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">
                 View Announcements
             </button>
@@ -129,13 +185,13 @@ GALLERY
         </div>
     </div>
 
-
+    <!-- Script inclusions as per original design -->
     <script src="alert.js"></script>
     <script src="navbar.js"></script>
     <script src="js/animation.js"></script>
       <script src="admin.js"></script>
     <script>
-
+        // Scroll Logic for Back-to-Top Button
         window.addEventListener('scroll', function() {
             const button = document.querySelector('.back-to-top');
             if (window.pageYOffset > 100) {
