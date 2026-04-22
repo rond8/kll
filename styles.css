@@ -1,17 +1,3 @@
-@font-face {
-  font-family: 'kllf';
-  src: url('kll.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'gb';
-  src: url('gb.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'main';
-  src: url('main.ttf') format('truetype');
-}
 
 /* Global */
 *{
@@ -20,7 +6,7 @@ box-sizing:border-box;
 
 body{ 
 margin:0;
-font-family:'main', Arial, sans-serif;
+font-family: Arial, sans-serif;
 }
 
 /* School Icon */
