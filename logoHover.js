@@ -1,21 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const logoSection = document.querySelector('.logo-body-wrapper');
-    const boxes = document.querySelectorAll('.d-box');
+/**
+ * logo-hover.js
+ * Dynamically changes the section background to a specific image 
+ * when hovering over geometric logo parts.
+ */
 
-    // Define colors for each specific box (optional) 
-    // or just use one consistent hover color
-    const hoverColor = "rgba(128, 0, 0, 0.05)"; // Very light KLL Maroon tint
+document.addEventListener('DOMContentLoaded', () => {
+    const logoSection = document.getElementById('dynamic-logo-section');
+    const boxes = document.querySelectorAll('.d-box');
 
     boxes.forEach(box => {
         box.addEventListener('mouseenter', () => {
-            // Change background of the whole section
-            logoSection.style.backgroundColor = hoverColor;
-            logoSection.style.borderRadius = "20px"; // Optional styling touch
+            // Get the image path from the data-bg attribute in HTML
+            const bgImage = box.getAttribute('data-bg');
+            
+            if (bgImage && logoSection) {
+                /**
+                 * We use a linear-gradient overlay (rgba 255,255,255, 0.8) 
+                 * This keeps the background image subtle so the logo stays readable.
+                 * Change the 0.8 to a higher number for more fade, or lower for more clarity.
+                 */
+                logoSection.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('${bgImage}')`;
+                
+                // Ensure the image covers the section properly
+                logoSection.style.backgroundSize = 'cover';
+                logoSection.style.backgroundPosition = 'center';
+                logoSection.style.borderRadius = "30px";
+            }
         });
 
         box.addEventListener('mouseleave', () => {
-            // Reset background when leaving
-            logoSection.style.backgroundColor = "transparent";
+            if (logoSection) {
+                // Reset to default state
+                logoSection.style.backgroundImage = 'none';
+                logoSection.style.backgroundColor = "transparent";
+                logoSection.style.borderRadius = "0px";
+            }
         });
     });
 });
