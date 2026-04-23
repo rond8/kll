@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         box.addEventListener('mouseenter', () => {
             // Get the image path from the data-bg attribute in HTML
             const bgImage = box.getAttribute('data-bg');
+             const bgText = box.getAttribute('txt');
             
             if (bgImage && logoSection) {
                 /**
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  * Change the 0.8 to a higher number for more fade, or lower for more clarity.
                  */
                 logoSection.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('${bgImage}')`;
-                
+                logoSection.innerHTML=`${bgtext}`
                 // Ensure the image covers the section properly
                 logoSection.style.backgroundSize = 'cover';
                 logoSection.style.backgroundPosition = 'center';
