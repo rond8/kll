@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
                  * This keeps the background image subtle so the logo stays readable.
                  * Change the 0.8 to a higher number for more fade, or lower for more clarity.
                  */
-                logoSection.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('${bgImage}')`;
+                logoSection.style.backgroundImage = ` url('${bgImage}')`;
                 logoSection.innerHTML=`${bgtext}`
                 // Ensure the image covers the section properly
                 logoSection.style.backgroundSize = 'cover';
                 logoSection.style.backgroundPosition = 'center';
-                logoSection.style.borderRadius = "30px";
+                logoSection.style.borderRadius = "20px";
             }
         });
 
