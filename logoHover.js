@@ -5,7 +5,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const logoSection = document.getElementById('dynamic-logo-section');
+    const logoSection = document.getElementById('image-preview');
     const boxes = document.querySelectorAll('.d-box');
 
     boxes.forEach(box => {
