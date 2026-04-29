@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KLL EDUCATIONAL SITE</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; }
@@ -12,47 +11,34 @@
         .text-kll-maroon { color: #800000; }
         .border-kll-maroon { border-color: #800000; }
 
+        /* --- SLIDESHOW STYLES --- */
+        .slide { display: none; }
+        .slide.active { display: block; animation: fade 0.8s ease-in-out; }
+        @keyframes fade {
+            from { opacity: 0.4; } 
+            to { opacity: 1; }
+        }
+
         /* --- GEOMETRIC LOGO CSS --- */
         .logo-body-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 2rem 0;
-            overflow-x: auto;
-            /* ADDED: Smooth transition for the background change */
+            display: flex; justify-content: center; padding: 2rem 0; overflow-x: auto;
             transition: background-color 0.5s ease, border-radius 0.5s ease;
         }
         .parent-logo {
             display: grid;
             grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); 
             grid-template-rows: repeat(5, clamp(40px, 8vw, 70px));
-            grid-column-gap: 8px;
-            transform: skewX(-5deg);
+            grid-column-gap: 8px; transform: skewX(-5deg);
         }
         .d-box {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: clamp(8px, 1.5vw, 12px);
-            text-align: center;
-            z-index: 1;
-            /* ADDED: Pointer cursor and hover transition */
-            cursor: pointer;
-            transition: transform 0.2s ease;
+            position: relative; display: flex; justify-content: center; align-items: center;
+            color: white; font-weight: bold; font-size: clamp(8px, 1.5vw, 12px);
+            text-align: center; z-index: 1; cursor: pointer; transition: transform 0.2s ease;
         }
-        .d-box:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
+        .d-box:hover { transform: scale(1.05); z-index: 10; }
         .d-box::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #800000;
-            z-index: -1;
-            transition: background-color 0.3s ease;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #800000; z-index: -1; transition: background-color 0.3s ease;
         }
         .text-inner { transform: skewX(5deg); padding: 2px; }
         .slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
@@ -71,103 +57,149 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
-    <div id="navbar"></div>
     <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
+                    <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-inner overflow-hidden">
                         <img src="asset/img/schoolicon.jpg" alt="KLL Logo" class="w-full h-full object-cover">
                     </div>
-                    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+                    <span class="font-bold text-lg sm:text-xl tracking-wide uppercase">Kolehiyo ng Lungsod ng Lipa</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="w-full bg-gray-200 border-b-4 border-yellow-500">
-        <div class="w-full h-64 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
-            <img src="asset/img/index.jpg" alt="KLL Index" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[KLL Campus Banner]'">
+    <section class="relative w-full h-64 md:h-[500px] bg-black overflow-hidden border-b-4 border-yellow-500">
+        <div class="slide active h-full">
+            <img src="asset/img/index.jpg" class="w-full h-full object-cover opacity-80" alt="Campus">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30">
+                <h2 class="text-3xl md:text-5xl font-black mb-2">Welcome to KLL</h2>
+                <p class="text-lg md:text-xl font-medium">Your Future Starts Here</p>
+            </div>
         </div>
-    </header>
-       <div class="w-full h-70 md:h-96 bg-gray-300 flex items-center justify-center text-gray-500 italic text-xl shadow-inner overflow-hidden">
-            <img src="" alt="KLL VIDEO" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[KLL VIDEO]'">
+        <div class="slide h-full">
+            <img src="asset/img/aboutus.jpg" class="w-full h-full object-cover opacity-80" alt="Students">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30">
+                <h2 class="text-3xl md:text-5xl font-black mb-2">Quality Education</h2>
+                <p class="text-lg md:text-xl font-medium">Excellence in every field</p>
+            </div>
         </div>
-
-    <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
-        <div class="text-center py-3">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
-                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
-                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
-                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
-                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
-                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
-                    <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
-                </div>
+        <div class="slide h-full">
+            <div class="w-full h-full bg-slate-800 flex items-center justify-center">
+                <p class="text-white italic text-xl">[ Campus Video Feature ]</p>
             </div>
         </div>
 
-            <div class="flex flex-wrap gap-3 mt-6">
-                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">View Announcements</button>
-                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'CollCalendar.html';">KLL Collegiate Calendar</button>
-                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'facilities.html';">FACILITIES</button>
-                <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'gallery.html';">GALLERY</button>
-            </div>
-        <div class="text-left py-4">
-              <div id='image-preview'  class="text-center py-3" style="color:red"><h1 class="text-6xl font-black text-gray-800 tracking-tighter">THIS IS KLL</h1> </div>
-      <section class="logo-body-wrapper" id="dynamic-logo-section">
-<div class="parent-logo">
-                    <div class="k-stem d-box straight" onclick="window.location.href='about.html';" data-bg="asset/img/aboutus.jpg"><div class="text-inner">ABOUT</div></div>
-                    <div class="k-top d-box slant-left" onclick="window.location.href='kll-info.html';"><div class="text-inner">E</div></div>
-                    <div class="k-bot d-box slant-right" onclick="window.location.href='pride.html';"><div class="text-inner">PRIDE</div></div>
-                    <div class="l1-stem d-box straight" onclick="window.location.href='student_login.html';"><div class="text-inner">STUDENT PORTAL</div></div>
-                    <div class="l1-base d-box base" onclick="window.location.href='admission.html';"><div class="text-inner">GO</div></div>
-                    <div class="l2-stem d-box straight" onclick="window.location.href='eLibrary.html';"><div class="text-inner">E LIBRARY</div></div>
-                    <div class="l2-base d-box base" onclick="window.location.href='contact.html';"><div class="text-inner">END</div></div>
-                </div>
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <span class="w-3 h-3 rounded-full bg-white/50 cursor-pointer hover:bg-white transition" onclick="setSlide(0)"></span>
+            <span class="w-3 h-3 rounded-full bg-white/50 cursor-pointer hover:bg-white transition" onclick="setSlide(1)"></span>
+            <span class="w-3 h-3 rounded-full bg-white/50 cursor-pointer hover:bg-white transition" onclick="setSlide(2)"></span>
         </div>
-</section>
+    </section>
 
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-b-8 border-red-800 text-center">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Students</p>
+                <p id="stat-total-students" class="text-5xl font-black text-gray-800">4,500+</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-b-8 border-yellow-500 text-center">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Active Courses</p>
+                <p id="stat-active-courses" class="text-5xl font-black text-gray-800">12</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-b-8 border-yellow-500 text-center">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">ESTABLISHED</p>
+                <p class="text-2xl font-black text-gray-800 mt-2">Feb 14, 1994</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-2 rounded-xl shadow transition transform hover:-translate-y-1" onclick="location.href='announcements.html'">Announcements</button>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-2 rounded-xl shadow transition transform hover:-translate-y-1" onclick="location.href='CollCalendar.html'">Calendar</button>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-2 rounded-xl shadow transition transform hover:-translate-y-1" onclick="location.href='facilities.html'">Facilities</button>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-2 rounded-xl shadow transition transform hover:-translate-y-1" onclick="location.href='gallery.html'">Gallery</button>
+        </div>
+
+        <div class="text-center mb-8">
+            <h1 class="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter uppercase mb-6">This is KLL</h1>
+            <section class="logo-body-wrapper bg-white rounded-3xl shadow-inner border border-gray-100" id="dynamic-logo-section">
+                <div class="parent-logo">
+                    <div class="k-stem d-box straight" onclick="location.href='about.html'"><div class="text-inner">ABOUT</div></div>
+                    <div class="k-top d-box slant-left" onclick="location.href='kll-info.html'"><div class="text-inner">E</div></div>
+                    <div class="k-bot d-box slant-right" onclick="location.href='pride.html'"><div class="text-inner">PRIDE</div></div>
+                    <div class="l1-stem d-box straight" onclick="location.href='student_login.html'"><div class="text-inner">PORTAL</div></div>
+                    <div class="l1-base d-box base" onclick="location.href='admission.html'"><div class="text-inner">GO</div></div>
+                    <div class="l2-stem d-box straight" onclick="location.href='eLibrary.html'"><div class="text-inner">LIBRARY</div></div>
+                    <div class="l2-base d-box base" onclick="location.href='contact.html'"><div class="text-inner">END</div></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="bg-white border-l-8 border-yellow-500 rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-center gap-6 mt-12">
+            <div class="text-5xl">💡</div>
+            <div class="flex-1">
+                <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400">Daily Inspiration</h3>
+                <p id="inspiration-text" class="text-2xl text-kll-maroon font-serif italic mt-2">"Education is the most powerful weapon which you can use to change the world."</p>
+                <button onclick="fetchInspiration()" class="mt-4 text-sm text-yellow-600 hover:text-yellow-700 font-bold flex items-center gap-1">
+                    Get New Advice <span>→</span>
+                </button>
+            </div>
         </div>
     </main>
 
-    <div class="max-w-4xl mx-auto mb-8 px-4">
-        <div class="bg-white border-l-8 border-yellow-500 rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="text-4xl">💡</div>
-            <div>
-                <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400">Daily Inspiration for KLLians</h3>
-                <p id="inspiration-text" class="text-xl text-kll-maroon font-serif italic mt-1">Loading wisdom...</p>
-                <button onclick="fetchInspiration()" class="mt-3 text-xs text-yellow-600 hover:underline font-bold">Get New Advice →</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-gray-800 text-white text-center py-6 mt-8">
-        <p>&copy; 2026 Kolehiyo ng Lungsod ng Lipa</p>
-        <div class="mt-4">
-            <a href="admin-login.html" class="text-gray-500 hover:text-white text-xs transition">Administrator Login</a>
+    <footer class="bg-gray-900 text-white text-center py-10 mt-12">
+        <p class="opacity-80">&copy; 2026 Kolehiyo ng Lungsod ng Lipa</p>
+        <div class="mt-4 flex justify-center gap-6">
+            <a href="admin-login.html" class="text-gray-500 hover:text-yellow-500 text-xs transition">Administrator Login</a>
+            <a href="#" class="text-gray-500 hover:text-yellow-500 text-xs transition">Privacy Policy</a>
         </div>
     </footer>
 
-    <button class="back-to-top fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hidden z-50 cursor-pointer border-2 border-white" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <button class="back-to-top fixed bottom-8 right-8 bg-kll-maroon text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl hidden z-50 transition-all hover:bg-red-700" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
         &uarr;
     </button>
 
-    <script src="alert.js"></script>
-    <script src="navbar.js"></script>
-    <script src="js/animation.js"></script>
-    <script src="admin.js"></script>
-    <script src="logoHover.js"></script>
     <script>
+        // --- Slideshow Logic ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function setSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        let slideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
+        }
+
+        // --- Back to Top Logic ---
         window.addEventListener('scroll', function() {
-            const button = document.querySelector('.back-to-top');
-            window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
+            const btn = document.querySelector('.back-to-top');
+            window.pageYOffset > 300 ? btn.classList.remove('hidden') : btn.classList.add('hidden');
         });
+
+        // --- Mock Inspiration Fetch ---
+        function fetchInspiration() {
+            const quotes = [
+                "Believe in yourself and all that you are.",
+                "Success is not final, failure is not fatal.",
+                "Your education is a dress rehearsal for a life that is yours to lead.",
+                "Learning never exhausts the mind."
+            ];
+            document.getElementById('inspiration-text').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+        }
     </script>
 </body>
 </html>
