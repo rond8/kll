@@ -4,37 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News - Kolehiyo ng Lungsod ng Lipa</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; }
         .bg-kll-maroon { background-color: #800000; }
         .text-kll-maroon { color: #800000; }
         .border-kll-maroon { border-color: #800000; }
-        
-        /* Back to top button style */
         .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #800000;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: opacity 0.3s;
+            position: fixed; bottom: 20px; right: 20px; background: #800000;
+            color: white; width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; transition: opacity 0.3s;
         }
         .hidden { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
-<div id="navbar"></div>
 <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
@@ -59,7 +45,6 @@
         <h1 class="text-3xl font-extrabold text-kll-maroon">Latest News</h1>
         <p class="mt-2 text-gray-600">Stay updated with the latest announcements from Kolehiyo ng Lungsod ng Lipa.</p>
 
-        <!-- DYNAMIC CONTAINER -->
         <div id="news-feed" class="mt-6 space-y-6">
             <p class="text-gray-500 animate-pulse">Loading latest announcements...</p>
         </div>
@@ -69,32 +54,52 @@
 <button class="back-to-top hidden" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
 <script>
-    // YOUR PUBLISHED CSV URL
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMy67c31VN-hWKDWfq8E3yTVw6IMrDb4cMBhleSSsE-c3cy1k8S4tNimYYOq3OD5J4EmOJOuzsZtaU/pub?output=csv';
+
+    function parseCSVLine(line) {
+        let result = [];
+        let curVal = "";
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+            let char = line[i];
+            if (char === '"' && line[i+1] === '"') { curVal += '"'; i++; }
+            else if (char === '"') { inQuotes = !inQuotes; }
+            else if (char === ',' && !inQuotes) { result.push(curVal); curVal = ""; }
+            else { curVal += char; }
+        }
+        result.push(curVal);
+        return result;
+    }
 
     async function fetchNews() {
         try {
             const response = await fetch(SHEET_URL);
             const csvText = await response.text();
-            
-            // Split rows and skip header
-            const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== "").slice(1);
+            const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== "");
             const container = document.getElementById('news-feed');
             container.innerHTML = ''; 
 
-            rows.forEach(row => {
-                // REGEX to handle commas inside quotes
-                const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            for (let i = 1; i < rows.length; i++) {
+                const cols = parseCSVLine(rows[i]);
                 
                 if (cols && cols.length >= 4) {
-                    // Clean quotes from the data[cite: 1]
-                    const title = cols[0].replace(/^"|"$/g, "").trim();
-                    const date = cols[1].replace(/^"|"$/g, "").trim();
-                    const tag = cols[2].replace(/^"|"$/g, "").trim();
-                    const content = cols[3].replace(/^"|"$/g, "").trim();
+                    const title = cols[0].trim();
+                    const date = cols[1].trim();
+                    const tag = cols[2].trim();
+                    const content = cols[3].trim();
+                    const link = cols[4] ? cols[4].trim() : ""; // NEW: Get link from 5th column
 
-                    // Generate the HTML using your exact classes
-                    const article = `
+                    // Create the "Read More" button only if a link exists
+                    const linkHTML = link ? `
+                        <div class="mt-4">
+                            <a href="${link}" target="_blank" class="inline-flex items-center text-sm font-bold text-kll-maroon hover:underline">
+                                Read More 
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+                    ` : "";
+
+                    container.innerHTML += `
                         <article class="border border-gray-200 rounded-lg p-5">
                             <header class="flex items-start justify-between gap-4">
                                 <div>
@@ -106,27 +111,23 @@
                                 </span>
                             </header>
                             <p class="mt-3 text-gray-700 leading-relaxed">${content}</p>
+                            ${linkHTML}
                         </article>
                     `;
-                    container.innerHTML += article;
                 }
-            });
+            }
         } catch (error) {
-            console.error("Error loading sheet:", error);
-            document.getElementById('news-feed').innerHTML = "Unable to load news at this time.";
+            console.error("Error:", error);
+            document.getElementById('news-feed').innerHTML = "Unable to load news.";
         }
     }
 
-    // Scroll Logic for Back to Top
     window.addEventListener('scroll', function() {
         const button = document.querySelector('.back-to-top');
         window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
     });
 
-    // Run fetcher on load
     window.onload = fetchNews;
 </script>
-
-<script src="navbar.js"></script>
 </body>
 </html>
