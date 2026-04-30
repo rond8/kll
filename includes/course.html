@@ -6,7 +6,26 @@
 </head>
  <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; } </style>
 <body>
+    
+    <div id="navbar"></div>
+    <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
+                        <img src="asset/img/schoolicon.jpg" onclick="window.location.href='index.html';" alt="KLL Logo" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+                </div>
+            </div>
+        </div>
+    </nav>
     <h1 id="main-title">Loading...</h1>
     <div id="content-container"></div>
 <script>
