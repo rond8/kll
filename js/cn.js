@@ -10,5 +10,5 @@ container.innerHTML = `
     </div>
 `;
 
-// You can also add module-specific functions
+
 console.log("College of Nursing Specific Logic initialized.");
