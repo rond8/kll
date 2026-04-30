@@ -11,6 +11,25 @@
         .bg-kll-maroon { background-color: #800000; }
         .text-kll-maroon { color: #800000; }
         .border-kll-maroon { border-color: #800000; }
+        
+        /* Back to top button style */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #800000;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: opacity 0.3s;
+        }
+        .hidden { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -20,9 +39,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
-                        <img src="asset/img/schoolicon.jpg" alt="KLL Logo" class="w-full h-full object-cover">
-                    </div>
+                <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
+                    <img src="asset/img/schoolicon.jpg" alt="KLL Logo" class="w-full h-full object-cover">
+                </div>
                 <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
             </div>
         </div>
@@ -34,6 +53,7 @@
         <img src="asset/img/news.jpg" alt="KLL News" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[News Banner]'">
     </div>
 </header>
+
 <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
     <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6">
         <h1 class="text-3xl font-extrabold text-kll-maroon">Latest News</h1>
@@ -46,8 +66,10 @@
     </div>
 </main>
 
+<button class="back-to-top hidden" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
 <script>
-    // PASTE YOUR PUBLISHED CSV URL HERE
+    // YOUR PUBLISHED CSV URL
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMy67c31VN-hWKDWfq8E3yTVw6IMrDb4cMBhleSSsE-c3cy1k8S4tNimYYOq3OD5J4EmOJOuzsZtaU/pub?output=csv';
 
     async function fetchNews() {
@@ -55,22 +77,23 @@
             const response = await fetch(SHEET_URL);
             const csvText = await response.text();
             
-            // Convert CSV text to Array (skipping header row)
-            const rows = csvText.split('\n').slice(1);
+            // Split rows and skip header
+            const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== "").slice(1);
             const container = document.getElementById('news-feed');
-            container.innerHTML = ''; // Clear loading text
+            container.innerHTML = ''; 
 
             rows.forEach(row => {
-                // Split by comma, but respect quotes for the content section
+                // REGEX to handle commas inside quotes
                 const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
                 
                 if (cols && cols.length >= 4) {
-                    const title = cols[0].replace(/"/g, "");
-                    const date = cols[1].replace(/"/g, "");
-                    const tag = cols[2].replace(/"/g, "");
-                    const content = cols[3].replace(/"/g, "");
+                    // Clean quotes from the data[cite: 1]
+                    const title = cols[0].replace(/^"|"$/g, "").trim();
+                    const date = cols[1].replace(/^"|"$/g, "").trim();
+                    const tag = cols[2].replace(/^"|"$/g, "").trim();
+                    const content = cols[3].replace(/^"|"$/g, "").trim();
 
-                    // The exact HTML structure from your design
+                    // Generate the HTML using your exact classes
                     const article = `
                         <article class="border border-gray-200 rounded-lg p-5">
                             <header class="flex items-start justify-between gap-4">
@@ -82,7 +105,7 @@
                                     ${tag}
                                 </span>
                             </header>
-                            <p class="mt-3 text-gray-700">${content}</p>
+                            <p class="mt-3 text-gray-700 leading-relaxed">${content}</p>
                         </article>
                     `;
                     container.innerHTML += article;
@@ -94,42 +117,16 @@
         }
     }
 
-    // Run the fetcher when page loads
+    // Scroll Logic for Back to Top
+    window.addEventListener('scroll', function() {
+        const button = document.querySelector('.back-to-top');
+        window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
+    });
+
+    // Run fetcher on load
     window.onload = fetchNews;
 </script>
-    <script src="navbar.js"></script>
+
+<script src="navbar.js"></script>
 </body>
-<script>
-        // Slideshow Logic
-        let currentIdx = 0;
-        const slides = document.querySelectorAll('.mySlides');
-        const slideInner = document.getElementById('slide-inner');
-        const slideNum = document.getElementById('slide-num');
-
-        function updateSlide() {
-            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-            slideNum.innerText = `${currentIdx + 1} / ${slides.length}`;
-        }
-
-        function moveSlide(direction) {
-            currentIdx += direction;
-            if (currentIdx >= slides.length) currentIdx = 0;
-            if (currentIdx < 0) currentIdx = slides.length - 1;
-            updateSlide();
-            resetTimer();
-        }
-
-        let slideTimer = setInterval(() => moveSlide(1), 5000);
-
-        function resetTimer() {
-            clearInterval(slideTimer);
-            slideTimer = setInterval(() => moveSlide(1), 5000);
-        }
-
-        // Back to Top script
-        window.addEventListener('scroll', function() {
-            const button = document.querySelector('.back-to-top');
-            window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
-        });
-    </script>
 </html>
