@@ -2,17 +2,13 @@
 const title = document.getElementById('main-title');
 const container = document.getElementById('content-container');
 
-title.innerText = "Computer Science Module";
+title.innerText = "College of Criminal Justice PAGE";
 container.innerHTML = `
-    <div class="ccs-info">
-        <p>Welcome to the CCS Department portal.</p>
-        <ul>
-            <li>Programming Logic</li>
-            <li>Web Development</li>
-            <li>Database Management</li>
-        </ul>
+    <div class="ccj-info">
+        <p>Welcome to the CCJ Department portal.</p>
+       
     </div>
 `;
 
-// You can also add module-specific functions
-console.log("CCS Specific Logic initialized.");
+
+console.log("CCJ Specific Logic initialized.");

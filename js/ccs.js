@@ -6,11 +6,7 @@ title.innerText = "Computer Science Module";
 container.innerHTML = `
     <div class="ccs-info">
         <p>Welcome to the CCS Department portal.</p>
-        <ul>
-            <li>Programming Logic</li>
-            <li>Web Development</li>
-            <li>Database Management</li>
-        </ul>
+        
     </div>
 `;
 

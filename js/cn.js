@@ -6,11 +6,7 @@ title.innerText = "College of Nursing PAGE";
 container.innerHTML = `
     <div class="cn-info">
         <p>Welcome to the College of Nursing Department portal.</p>
-        <ul>
-            <li>Medical Terminology</li>
-            <li>Anatomy and Physiology</li>
-            <li>Pharmacology</li>
-        </ul>
+    
     </div>
 `;
 
