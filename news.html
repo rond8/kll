@@ -34,65 +34,102 @@
         <img src="asset/img/news.jpg" alt="KLL News" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='[News Banner]'">
     </div>
 </header>
-
 <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
     <div class="bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6">
         <h1 class="text-3xl font-extrabold text-kll-maroon">Latest News</h1>
         <p class="mt-2 text-gray-600">Stay updated with the latest announcements from Kolehiyo ng Lungsod ng Lipa.</p>
 
-        <div class="mt-6 space-y-6">
-            <article class="border border-gray-200 rounded-lg p-5">
-                <header class="flex items-start justify-between gap-4">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">Enrollment for A.Y. 2026-2027 Now Open</h2>
-                        <p class="text-sm text-gray-500 mt-1">March 12, 2026</p>
-                    </div>
-                    <span class="text-xs font-semibold uppercase tracking-wide text-yellow-600">New</span>
-                </header>
-                <p class="mt-3 text-gray-700">Enrollment for the upcoming academic year is now open. Applicants are encouraged to submit requirements early to avoid delays. Visit the Admissions page for full details.</p>
-            </article>
-
-            <article class="border border-gray-200 rounded-lg p-5">
-                <header class="flex items-start justify-between gap-4">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">KLL Starts Free Tutoring Sessions</h2>
-                        <p class="text-sm text-gray-500 mt-1">February 28, 2026</p>
-                    </div>
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-500">Updated</span>
-                </header>
-                <p class="mt-3 text-gray-700">Students are invited to join our free tutoring sessions every Saturday in the library. Sign-ups are available at the Student Services office.</p>
-            </article>
-
-            <article class="border border-gray-200 rounded-lg p-5">
-                <header class="flex items-start justify-between gap-4">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">New Library Hours Starting April</h2>
-                        <p class="text-sm text-gray-500 mt-1">February 10, 2026</p>
-                    </div>
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-500">Updated</span>
-                </header>
-                <p class="mt-3 text-gray-700">The library will now be open from 7:00 AM to 9:00 PM on weekdays, and 8:00 AM to 5:00 PM on weekends.</p>
-            </article>
+        <!-- DYNAMIC CONTAINER -->
+        <div id="news-feed" class="mt-6 space-y-6">
+            <p class="text-gray-500 animate-pulse">Loading latest announcements...</p>
         </div>
     </div>
 </main>
 
-<script src="navbar.js"></script>
 <script>
-// Mark news read when this page loads so the notification dot disappears.
-localStorage.setItem('kllNewsRead', 'true');
-</script>
+    // PASTE YOUR PUBLISHED CSV URL HERE
+    const SHEET_URL = 'YOUR_PUBLISHED_CSV_URL_HERE';
 
-<script>
-window.addEventListener('scroll', function() {
-    const button = document.querySelector('.back-to-top');
-    if (window.pageYOffset > 100) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
+    async function fetchNews() {
+        try {
+            const response = await fetch(SHEET_URL);
+            const csvText = await response.text();
+            
+            // Convert CSV text to Array (skipping header row)
+            const rows = csvText.split('\n').slice(1);
+            const container = document.getElementById('news-feed');
+            container.innerHTML = ''; // Clear loading text
+
+            rows.forEach(row => {
+                // Split by comma, but respect quotes for the content section
+                const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                
+                if (cols && cols.length >= 4) {
+                    const title = cols[0].replace(/"/g, "");
+                    const date = cols[1].replace(/"/g, "");
+                    const tag = cols[2].replace(/"/g, "");
+                    const content = cols[3].replace(/"/g, "");
+
+                    // The exact HTML structure from your design
+                    const article = `
+                        <article class="border border-gray-200 rounded-lg p-5">
+                            <header class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h2 class="text-xl font-semibold text-gray-800">${title}</h2>
+                                    <p class="text-sm text-gray-500 mt-1">${date}</p>
+                                </div>
+                                <span class="text-xs font-semibold uppercase tracking-wide ${tag.toLowerCase() === 'new' ? 'text-yellow-600' : 'text-gray-500'}">
+                                    ${tag}
+                                </span>
+                            </header>
+                            <p class="mt-3 text-gray-700">${content}</p>
+                        </article>
+                    `;
+                    container.innerHTML += article;
+                }
+            });
+        } catch (error) {
+            console.error("Error loading sheet:", error);
+            document.getElementById('news-feed').innerHTML = "Unable to load news at this time.";
+        }
     }
-});
+
+    // Run the fetcher when page loads
+    window.onload = fetchNews;
 </script>
-<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+    <script src="navbar.js"></script>
 </body>
+<script>
+        // Slideshow Logic
+        let currentIdx = 0;
+        const slides = document.querySelectorAll('.mySlides');
+        const slideInner = document.getElementById('slide-inner');
+        const slideNum = document.getElementById('slide-num');
+
+        function updateSlide() {
+            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
+            slideNum.innerText = `${currentIdx + 1} / ${slides.length}`;
+        }
+
+        function moveSlide(direction) {
+            currentIdx += direction;
+            if (currentIdx >= slides.length) currentIdx = 0;
+            if (currentIdx < 0) currentIdx = slides.length - 1;
+            updateSlide();
+            resetTimer();
+        }
+
+        let slideTimer = setInterval(() => moveSlide(1), 5000);
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => moveSlide(1), 5000);
+        }
+
+        // Back to Top script
+        window.addEventListener('scroll', function() {
+            const button = document.querySelector('.back-to-top');
+            window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
+        });
+    </script>
 </html>
