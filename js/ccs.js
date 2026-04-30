@@ -1,4 +1,4 @@
-// This runs as soon as the script is injected into course.html
+
 const title = document.getElementById('main-title');
 const container = document.getElementById('content-container');
 
