@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1 id="main-title">Loading...</h1>
+    <div id="content-area"></div>
+
+    <script>
+        // Use the window object to get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const moduleName = urlParams.get('module');
+
+        if (moduleName) {
+            const script = document.createElement('script');
+            
+            // Adding a version/timestamp helps bypass browser cache on deployed sites
+            const version = new Date().getTime();
+            script.src = `${moduleName}.js?v=${version}`;
+
+            script.onload = () => {
+                console.log(`${moduleName} script loaded successfully.`);
+            };
+
+            script.onerror = () => {
+                document.getElementById('main-title').innerText = "Error loading module.";
+            };
+
+            document.body.appendChild(script);
+        } else {
+            document.getElementById('main-title').innerText = "No module selected.";
+        }
+    </script>
+</body>
+</html>
