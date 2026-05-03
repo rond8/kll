@@ -12,7 +12,7 @@
         .text-kll-maroon { color: #800000; }
         .border-kll-maroon { border-color: #800000; }
         
-        /* Back to top button style from your original design */
+        /* Back to top button style */
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -23,6 +23,16 @@
             border-radius: 5px;
             cursor: pointer;
             z-index: 1000;
+            transition: opacity 0.3s;
+        }
+
+        /* News item hover effect */
+        .news-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -33,9 +43,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <div class="flex items-center gap-3">
-                   <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
-                        <img src="asset/img/schoolicon.jpg" onclick="window.location.href='/index.html';" alt="KLL Logo" class="w-full h-full object-cover">
-                    </div>
+                <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden cursor-pointer" onclick="window.location.href='index.html';">
+                    <img src="asset/img/schoolicon.jpg" alt="KLL Logo" class="w-full h-full object-cover">
+                </div>
                 <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
             </div>
         </div>
@@ -63,10 +73,9 @@
 <script src="navbar.js"></script>
 
 <script>
-    // Link to your KLL News Database[cite: 1]
+    // Link to your KLL News Database
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMy67c31VN-hWKDWfq8E3yTVw6IMrDb4cMBhleSSsE-c3cy1k8S4tNimYYOq3OD5J4EmOJOuzsZtaU/pub?output=csv';
 
-    // Professional CSV Parser to prevent Title/Content from cutting off[cite: 1]
     function parseCSVLine(line) {
         let result = [];
         let curVal = "";
@@ -94,11 +103,11 @@
                 const cols = parseCSVLine(rows[i]);
                 
                 if (cols && cols.length >= 4) {
-                    const title = cols[0].trim();   // Title[cite: 1]
-                    const date = cols[1].trim();    // Date[cite: 1]
-                    const tag = cols[2].trim();     // Tag[cite: 1]
-                    const content = cols[3].trim(); // Content[cite: 1]
-                    const link = cols[4] ? cols[4].trim() : ""; // Link[cite: 1]
+                    const title = cols[0].trim();
+                    const date = cols[1].trim();
+                    const tag = cols[2].trim();
+                    const content = cols[3].trim();
+                    const link = cols[4] ? cols[4].trim() : "";
 
                     const linkButton = link ? `
                         <div class="mt-4">
@@ -109,17 +118,17 @@
                         </div>` : "";
 
                     container.innerHTML += `
-                        <article class="border border-gray-200 rounded-lg p-5">
-                            <header class="flex items-start justify-between gap-4">
+                        <article class="news-card bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+                            <header class="flex items-start justify-between gap-4 bg-white p-2 -mx-2 -mt-2 rounded-t-lg border-b border-gray-50 mb-3">
                                 <div>
-                                    <h2 class="text-xl font-semibold text-gray-800">${title}</h2>
-                                    <p class="text-sm text-gray-500 mt-1">${date}</p>
+                                    <h2 class="text-xl font-bold text-gray-800">${title}</h2>
+                                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-tighter">${date}</p>
                                 </div>
-                                <span class="text-xs font-semibold uppercase tracking-wide ${tag.toLowerCase() === 'new' ? 'text-yellow-600' : 'text-gray-500'}">
+                                <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest ${tag.toLowerCase() === 'new' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-600'}">
                                     ${tag}
                                 </span>
                             </header>
-                            <p class="mt-3 text-gray-700 leading-relaxed">${content}</p>
+                            <p class="text-gray-700 leading-relaxed text-sm md:text-base">${content}</p>
                             ${linkButton}
                         </article>
                     `;
@@ -127,54 +136,27 @@
             }
         } catch (error) {
             console.error("Error:", error);
-            document.getElementById('news-feed').innerHTML = "Unable to load news.";
+            document.getElementById('news-feed').innerHTML = "<p class='text-red-500'>Unable to load news. Please try again later.</p>";
         }
     }
 
     window.onload = function() {
         fetchNews();
-        // Keep your original localstorage logic
         localStorage.setItem('kllNewsRead', 'true');
     };
 </script>
 
+<button class="back-to-top" style="display:none;" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
 <script>
-    // Slideshow Logic - Keeping it exactly as you had it
-    let currentIdx = 0;
-    const slides = document.querySelectorAll('.mySlides');
-    const slideInner = document.getElementById('slide-inner');
-    const slideNum = document.getElementById('slide-num');
-
-    function updateSlide() {
-        if(slideInner) slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-        if(slideNum) slideNum.innerText = `${currentIdx + 1} / ${slides.length}`;
-    }
-
-    function moveSlide(direction) {
-        currentIdx += direction;
-        if (currentIdx >= slides.length) currentIdx = 0;
-        if (currentIdx < 0) currentIdx = slides.length - 1;
-        updateSlide();
-        resetTimer();
-    }
-
-    let slideTimer = setInterval(() => moveSlide(1), 5000);
-
-    function resetTimer() {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(() => moveSlide(1), 5000);
-    }
-
-    // Back to Top script - Keeping it exactly as you had it
+    // Back to Top visibility logic
     window.addEventListener('scroll', function() {
         const button = document.querySelector('.back-to-top');
         if(button) {
-            window.pageYOffset > 100 ? button.style.display = 'block' : button.style.display = 'none';
+            window.pageYOffset > 300 ? button.style.display = 'block' : button.style.display = 'none';
         }
     });
 </script>
-
-<button class="back-to-top" style="display:none;" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
 </body>
 </html>
