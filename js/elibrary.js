@@ -76,3 +76,5 @@ function filterCategory(category) {
 }
 
 fetchLibraryData();
+// Optional: Auto-refresh every 5 minutes
+setInterval(fetchLibraryData, 300000);
