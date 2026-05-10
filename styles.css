@@ -1,45 +1,20 @@
-/* --- 1. GLOBAL RESET & BASE STYLES --- */
+/* --- 1. CORE RESET & LAYOUT --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body { 
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f9fafb; /* Light gray background */
-    color: #1f2937;           /* Dark gray text */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     line-height: 1.6;
 }
 
-/* --- 2. KLL BRANDING & UTILITIES --- */
-.bg-kll-maroon { background-color: #800000; }
-.text-kll-maroon { color: #800000; }
-.bg-yellow-kll { background-color: #eab308; }
-.text-white { color: #ffffff; }
-
-/* --- 3. LAYOUT SYSTEM (Pure CSS replacement for Frameworks) --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.justify-center { justify-content: center; }
-.flex-wrap { flex-wrap: wrap; }
-.gap-3 { gap: 12px; }
-.gap-6 { gap: 24px; }
-
-.grid { display: grid; gap: 24px; }
-.grid-cols-1 { grid-template-columns: 1fr; }
-
-/* Responsive Grid for Tablets/Desktops */
-@media (min-width: 768px) {
-    .md-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+/* --- 2. THE NAV BAR & HEADER (Functional Replacement) --- */
+.bg-kll-maroon { 
+    background-color: #800000; 
 }
 
 .sticky-top {
@@ -48,29 +23,32 @@ body {
     z-index: 1000;
 }
 
-.shadow-md {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* --- 4. NAVIGATION & HEADER --- */
-nav.nav-bar {
-    height: 70px;
+.nav-brand {
     display: flex;
     align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.school-icon-wrapper {
-    width: 45px;
-    height: 45px;
+.school-icon {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    object-fit: cover;
     background: white;
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* --- 5. SLIDESHOW --- */
+/* --- 3. SLIDESHOW FUNCTIONALITY --- */
 .slideshow-wrapper {
     position: relative;
     width: 100%;
@@ -89,64 +67,56 @@ nav.nav-bar {
 .mySlides {
     min-width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .mySlides img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* --- 6. GEOMETRIC LOGO (Your Custom Component) --- */
-.logo-body-wrapper { 
-    display: flex; 
-    justify-content: center; 
-    padding: 3rem 0; 
+/* --- 4. GEOMETRIC LOGO (Keeping your original logic) --- */
+.logo-body-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
 }
 
-.parent-logo { 
-    display: grid; 
-    grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); 
-    grid-template-rows: repeat(5, clamp(40px, 8vw, 70px)); 
-    grid-column-gap: 8px; 
-    transform: skewX(-5deg); 
+.parent-logo {
+    display: grid;
+    grid-template-columns: repeat(9, clamp(40px, 8vw, 70px));
+    grid-template-rows: repeat(5, clamp(40px, 8vw, 70px));
+    grid-column-gap: 5px;
+    transform: skewX(-5deg);
 }
 
-.d-box { 
-    position: relative; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    color: white; 
-    font-weight: bold; 
-    font-size: clamp(10px, 1.5vw, 14px); 
-    z-index: 1; 
+.d-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    z-index: 1;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.d-box:hover { transform: scale(1.05); z-index: 10; }
-
-.d-box::before { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background-color: #800000; 
-    z-index: -1; 
+.d-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #800000;
+    z-index: -1;
+    transition: background-color 0.3s;
 }
 
-.text-inner { transform: skewX(5deg); padding: 4px; text-align: center; }
+.d-box:hover::before {
+    background-color: #a00000;
+}
 
-/* Polygon Shapes */
-.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
-.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
-.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
-.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+.text-inner { transform: skewX(5deg); }
 
-/* Grid Areas */
+/* Grid positioning for K L L */
 .k-stem { grid-area: 1 / 1 / 6 / 2; }
 .k-top  { grid-area: 1 / 2 / 4 / 3; }
 .k-bot  { grid-area: 3 / 2 / 6 / 3; }
@@ -155,31 +125,7 @@ nav.nav-bar {
 .l2-stem { grid-area: 1 / 7 / 6 / 8; }
 .l2-base { grid-area: 5 / 8 / 6 / 9; }
 
-/* --- 7. BUTTONS & CARDS --- */
-.stat-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    text-align: left;
-}
-
-.announcement-btn {
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-    font-size: 1rem;
-}
-
-.announcement-btn:hover { transform: scale(1.05); }
-
-footer {
-    background: #1f2937;
-    color: white;
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 50px;
-}
+.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
