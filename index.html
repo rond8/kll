@@ -8,12 +8,16 @@
 </head>
 <body>
 
-    <nav class="bg-kll-maroon sticky-top nav-container">
-        <div class="nav-brand">
-            <img src="asset/img/schoolicon.jpg" alt="Logo" class="school-icon">
-            <span>Kolehiyo ng Lungsod ng Lipa</span>
+    <nav class="bg-kll-maroon text-white sticky-top shadow-md nav-bar">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="school-icon-wrapper">
+                    <img src="asset/img/schoolicon.jpg" alt="KLL Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span style="font-weight: bold; font-size: 1.2rem; letter-spacing: 0.5px;">Kolehiyo ng Lungsod ng Lipa</span>
+            </div>
         </div>
-        </nav>
+    </nav>
 
     <div class="slideshow-wrapper">
         <div class="slides-container" id="slide-inner">
@@ -23,39 +27,64 @@
         </div>
     </div>
 
-    <main style="padding: 40px 5%;">
-        <div style="text-align: center;">
-            <h1 style="font-size: 3rem; margin-bottom: 20px;">THIS IS KLL</h1>
+    <main class="container" style="padding-top: 40px;">
+        
+        <div class="grid grid-cols-1 md-grid-cols-3 gap-6">
+            <div class="stat-card" style="border-bottom: 5px solid #800000;">
+                <p style="color: #9ca3af; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;">Total Students</p>
+                <p id="stat-total-students" style="font-size: 2.5rem; font-weight: 900;">2,450</p>
+            </div>
+            <div class="stat-card" style="border-bottom: 5px solid #eab308;">
+                <p style="color: #9ca3af; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;">Active Courses</p>
+                <p id="stat-active-courses" style="font-size: 2.5rem; font-weight: 900;">12</p>
+            </div>
+            <div class="stat-card" style="border-bottom: 5px solid #eab308;">
+                <p style="color: #9ca3af; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;">Established</p>
+                <p style="font-size: 1.5rem; font-weight: 900; margin-top: 10px;">Feb 14, 1994</p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3" style="margin-top: 40px; justify-content: center;">
+            <button class="announcement-btn bg-yellow-kll" onclick="location.href='announcements.html'">View Announcements</button>
+            <button class="announcement-btn bg-yellow-kll" onclick="location.href='facilities.html'">Facilities</button>
+            <button class="announcement-btn bg-yellow-kll" onclick="location.href='gallery.html'">Gallery</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <h1 style="font-size: 4rem; font-weight: 900; color: #111827; letter-spacing: -2px; margin-bottom: 20px;">THIS IS KLL</h1>
             
             <section class="logo-body-wrapper">
                 <div class="parent-logo">
-                    <div class="k-stem d-box straight"><div class="text-inner">KLL</div></div>
+                    <div class="k-stem d-box straight" onclick="location.href='about.html'"><div class="text-inner">ABOUT</div></div>
                     <div class="k-top d-box slant-left"><div class="text-inner">E</div></div>
                     <div class="k-bot d-box slant-right"><div class="text-inner">PRIDE</div></div>
-                    <div class="l1-stem d-box straight"><div class="text-inner">LIPA</div></div>
-                    <div class="l1-base d-box base"><div class="text-inner">CITY</div></div>
-                    <div class="l2-stem d-box straight"><div class="text-inner">EST.</div></div>
-                    <div class="l2-base d-box base"><div class="text-inner">1994</div></div>
+                    <div class="l1-stem d-box straight" onclick="location.href='student_login.html'"><div class="text-inner">PORTAL</div></div>
+                    <div class="l1-base d-box base" onclick="location.href='admission.html'"><div class="text-inner">GO</div></div>
+                    <div class="l2-stem d-box straight" onclick="location.href='elibrary.html'"><div class="text-inner">E-LIB</div></div>
+                    <div class="l2-base d-box base"><div class="text-inner">END</div></div>
                 </div>
             </section>
         </div>
     </main>
 
-    <script>
-        // Automatic Slideshow Logic
-        let currentIdx = 0;
-        const slides = document.querySelectorAll('.mySlides');
-        const slideInner = document.getElementById('slide-inner');
+    <footer>
+        <p>&copy; 2026 Kolehiyo ng Lungsod ng Lipa</p>
+        <p style="font-size: 0.7rem; color: #6b7280; margin-top: 10px;">Developed for Institutional Use</p>
+    </footer>
 
-        function nextSlide() {
-            currentIdx = (currentIdx + 1) % slides.length;
-            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-        }
-
-        setInterval(nextSlide, 5000); // Change image every 5 seconds
-    </script>
-    
     <script src="navbar.js"></script>
     <script src="logoHover.js"></script>
+    <script>
+        // Simple slideshow auto-play
+        let index = 0;
+        function showSlides() {
+            const inner = document.getElementById('slide-inner');
+            const slides = document.querySelectorAll('.mySlides');
+            index++;
+            if (index >= slides.length) index = 0;
+            inner.style.transform = `translateX(-${index * 100}%)`;
+        }
+        setInterval(showSlides, 4000);
+    </script>
 </body>
 </html>

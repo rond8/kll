@@ -1,92 +1,441 @@
-/* --- 1. CORE RESET & LAYOUT --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+/* Global */
+*{
+box-sizing:border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+body{ 
+margin:0;
 }
 
-/* --- 2. THE NAV BAR & HEADER (Functional Replacement) --- */
-.bg-kll-maroon { 
-    background-color: #800000; 
+/* School Icon */
+#schoolicon{
+float:left;
+height: 100px;
+margin-right:20px;
+border-radius:5%;
+width:150px;
+max-width:100%;
 }
 
-.sticky-top {
-    position: sticky;
-    top: 0;
+/* Header */
+header{
+background:red;
+color:white;
+padding:0;
+text-align:center;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+}
+
+h1{
+margin:0;
+}
+
+/* Navigation */
+header {
+    position: relative;
+}
+
+.nav-toggle {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
     z-index: 1000;
 }
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 5%;
+nav{
+background:#333;
+}
+
+nav ul{
+list-style:none;
+margin:0;
+padding:0;
+display:flex;
+flex-wrap:wrap;
+}
+
+nav ul li{
+flex:1;
+min-width:120px;
+}
+
+nav ul li a{
+display:block;
+padding:14px;
+text-align:center;
+text-decoration:none;
+color:white;
+}
+
+nav ul li a:hover{
+background:#8c0202;
+}
+
+/* Notification badge for nav items */
+.nav-badge {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #db3434;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+.nav-badge.hidden {
+  display: none;
+}
+
+/* Content */
+section{
+padding:40px;
+max-width:1200px;
+margin:auto;
+}
+
+/* Footer */
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:15px;
+}
+
+/* Announcement Modal */
+
+.modal{
+display:none;
+position:fixed;
+z-index:999;
+padding-top:120px;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background-color:rgba(0,0,0,0.6);
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+display: block;
+opacity: 1;
+visibility: visible;
+}
+
+.modal-content{
+background:white;
+margin:auto;
+padding:20px;
+width:90%;
+max-width:700px;
+max-height:70vh;
+border-radius:8px;
+text-align:center;
+overflow-y:auto;
+animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+from {
+    transform: translateY(-50px);
+    opacity: 0;
+}
+to {
+    transform: translateY(0);
+    opacity: 1;
+}
+}
+
+.close{
+float:right;
+font-size:28px;
+cursor:pointer;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #db3434;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Login */
+
+#login{
+width:90%;
+max-width:300px;
+margin:40px auto;
+background:white;
+padding:20px;
+border-radius:5px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+/* Image */
+
+#cimg{
+width:100%;
+height:auto;
+max-width:752px;
+}
+
+/* Result */
+
+#result{
+width:90%;
+max-width:700px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:5px;
+}
+
+/* Loading Image */
+
+#loading {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
+
+/* Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+overflow-x:auto;
+display:block;
+}
+
+th,td{
+border:1px solid #ff0000;
+padding:8px;
+text-align:left;
+}
+
+th{
+background:#f0f0f0;
+}
+
+/* Headings */
+
+h2,h3{
+font-family: Arial, sans-serif;
+color:red;
+}
+
+/* Links */
+
+a{
+color:#8c0202;
+text-decoration:none;
+}
+
+/* Card Styles */
+.card{
+    background:rgb(226, 176, 176);
+    border-radius:10px;
+    padding:20px;
+    margin:20px 0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h2{
+    color:#5e3434;
+    border-bottom:2px solid #db3434;
+    padding-bottom:8px;
+}
+
+/* Announcement Button */
+.announcement-btn {
+    background: red;
     color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.school-icon {
-    height: 50px;
-    width: 50px;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    object-fit: cover;
-    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px 0;
 }
 
-/* --- 3. SLIDESHOW FUNCTIONALITY --- */
-.slideshow-wrapper {
+.announcement-btn:hover {
+    background: #8c0202;
+}
+
+/* Responsive Breakpoints */
+
+/* Tablets */
+@media (max-width: 768px){
+
+header{
+padding:0;
+}
+
+header img {
+    max-height: 250px; /* Medium height on tablets */
+}
+
+section{
+padding:20px;
+}
+
+nav {
+    display: block;
     position: relative;
     width: 100%;
-    height: 450px;
-    background-color: #1a1a1a;
-    overflow: hidden;
-    border-bottom: 4px solid #eab308;
+    background: #333;
+    z-index: 999;
 }
 
-.slides-container {
+nav.open ul {
     display: flex;
-    transition: transform 0.6s ease-in-out;
-    height: 100%;
 }
 
-.mySlides {
-    min-width: 100%;
-    height: 100%;
+nav ul{
+    display: none;
+    flex-direction:column;
 }
 
-.mySlides img {
+nav ul li{
+    width:100%;
+    min-width:0;
+}
+
+nav ul li a{
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#schoolicon{
+float:left;
+display:block;
+height: 100px;
+}
+
+.nav-toggle {
+    display: block;
+}
+
+}
+/* Phones */
+@media (max-width: 480px){
+
+h1{
+font-size:22px;
+}
+
+body {
+    padding: 0 10px;
+}
+
+header {
+    text-align: center;
+}
+
+header img {
+    float: none;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-height: none;
 }
 
-/* --- 4. GEOMETRIC LOGO (Keeping your original logic) --- */
+.card {
+    padding: 15px;
+    margin: 12px 0;
+}
+
+.announcement-btn {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-content{
+width:95%;
+}
+
+#login{
+margin:20px auto;
+}
+
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: opacity 0.3s;
+}
+
+.back-to-top:hover {
+    background: #8c0202;
+}
+/* --- RESPONSIVE GEOMETRIC LOGO --- */
 .logo-body-wrapper {
+    width: 100%;
+    max-width: 800px; /* Limits size on large desktops */
+    margin: 0 auto;
+    padding: 2rem 1rem;
     display: flex;
     justify-content: center;
-    padding: 50px 0;
 }
 
 .parent-logo {
     display: grid;
-    grid-template-columns: repeat(9, clamp(40px, 8vw, 70px));
-    grid-template-rows: repeat(5, clamp(40px, 8vw, 70px));
-    grid-column-gap: 5px;
+    /* Uses container width (%) to determine cell size */
+    grid-template-columns: repeat(9, 1fr); 
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 1%;
+    /* Maintain a consistent shape regardless of screen size */
+    width: 100%;
+    aspect-ratio: 9 / 5; 
     transform: skewX(-5deg);
 }
 
@@ -97,26 +446,39 @@ body {
     align-items: center;
     color: white;
     font-weight: bold;
+    /* Font size scales based on logo width */
+    font-size: 1.5vw; 
+    text-align: center;
     z-index: 1;
-    cursor: pointer;
+}
+
+/* On very small screens, make font slightly larger so it stays readable */
+@media (max-width: 640px) {
+    .d-box { font-size: 2.5vw; }
+}
+/* On very large screens, cap the font size */
+@media (min-width: 1024px) {
+    .d-box { font-size: 14px; }
 }
 
 .d-box::before {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background-color: #800000;
     z-index: -1;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-.d-box:hover::before {
-    background-color: #a00000;
-}
+.text-inner { transform: skewX(5deg); padding: 2px; line-height: 1; }
 
-.text-inner { transform: skewX(5deg); }
+/* Polygon shapes stay responsive because percentages are relative to the cell */
+.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
 
-/* Grid positioning for K L L */
+/* Grid areas remain the same */
 .k-stem { grid-area: 1 / 1 / 6 / 2; }
 .k-top  { grid-area: 1 / 2 / 4 / 3; }
 .k-bot  { grid-area: 3 / 2 / 6 / 3; }
@@ -125,7 +487,9 @@ body {
 .l2-stem { grid-area: 1 / 7 / 6 / 8; }
 .l2-base { grid-area: 5 / 8 / 6 / 9; }
 
-.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
-.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
-.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
-.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+#image-preview {
+    /* ... existing styles ... */
+    background-repeat: no-repeat;
+    /* Added background-image to the transition */
+    transition: background-color 0.5s ease, background-image 0.5s ease, border-radius 0.5s ease;
+}
