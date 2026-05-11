@@ -1,54 +1,275 @@
-// configuration
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKTUdNYNKaMjS_XD7i4V7OUlie2gike5sWQhkQ3Uje9Plsmt9RrtquzLpxMAg-iA/exec"; 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLL EDUCATIONAL SITE</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .bg-kll-maroon { background-color: #800000; }
+        .text-kll-maroon { color: #800000; }
+        .border-kll-maroon { border-color: #800000; }
 
-let slideIndex = 1;
+        /* --- SLIDESHOW CONTAINER --- */
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background-color: #1a1a1a;
+            overflow: hidden;
+        }
 
-async function initSlideshow() {
-    try {
-        const response = await fetch(GOOGLE_SCRIPT_URL);
-        const data = await response.json();
-        
-        const container = document.getElementById('slide-inner');
-        
-        // Maps the Google Sheet columns: slideNumber, image, link, alt
-        container.innerHTML = data.map((slide, index) => `
-            <div class="mySlides fade" style="display: ${index === 0 ? 'block' : 'none'}" onclick="window.location.href='${slide.link}';">
-                <img src="${slide.image}" alt="${slide.alt}" style="width:100%">
+        .slides-container {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            height: 100%;
+        }
+
+        .mySlides {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .mySlides img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- NAVIGATION BUTTONS --- */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(128, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            border: none;
+            z-index: 10;
+            font-weight: bold;
+            border-radius: 0 5px 5px 0;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background: #800000; }
+        .next { right: 0; border-radius: 5px 0 0 5px; }
+
+        .slide-counter {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 11;
+        }
+
+        /* --- LOGO CSS (PRESERVED) --- */
+        .logo-body-wrapper { display: flex; justify-content: center; padding: 2rem 0; overflow-x: auto; transition: background-color 0.5s ease, border-radius 0.5s ease; }
+        .parent-logo { display: grid; grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); grid-template-rows: repeat(5, clamp(40px, 8vw, 70px)); grid-column-gap: 8px; transform: skewX(-5deg); }
+        .d-box { position: relative; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: clamp(8px, 1.5vw, 12px); text-align: center; z-index: 1; cursor: pointer; transition: transform 0.2s ease; }
+        .d-box:hover { transform: scale(1.05); z-index: 10; }
+        .d-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #800000; z-index: -1; transition: background-color 0.3s ease; }
+        .text-inner { transform: skewX(5deg); padding: 2px; }
+        .slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+        .slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+        .straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+        .base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+        .k-stem { grid-area: 1 / 1 / 6 / 2; } .k-top { grid-area: 1 / 2 / 4 / 3; } .k-bot { grid-area: 3 / 2 / 6 / 3; } .l1-stem { grid-area: 1 / 4 / 6 / 5; } .l1-base { grid-area: 5 / 5 / 6 / 6; } .l2-stem { grid-area: 1 / 7 / 6 / 8; } .l2-base { grid-area: 5 / 8 / 6 / 9; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <div id="navbar"></div>
+    <nav class="bg-kll-maroon text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center text-kll-maroon font-bold text-xs shadow-inner overflow-hidden">
+                        <img src="asset/img/schoolicon.jpg" onclick="window.location.href='/index.html';" alt="KLL Logo" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-bold text-lg sm:text-xl tracking-wide">Kolehiyo ng Lungsod ng Lipa</span>
+                </div>
             </div>
-        `).join('');
+        </div>
+    </nav>
 
-        updateCounter(1, data.length);
-    } catch (error) {
-        console.error("Failed to load slides:", error);
-        document.getElementById('slide-inner').innerHTML = "<p>Error loading slides.</p>";
-    }
-}
+<div class="slideshow-wrapper border-b-4 border-yellow-500">
+    <div class="slide-counter" id="slide-num">Loading...</div>
+    <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
 
-function moveSlide(n) {
-    showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
+    <div class="slides-container" id="slide-inner">
+        </div>
+</div>
+<script>
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwnuTgVmucNQmw8Dllle4tYR5qq9rZjHrMLrTo0QRxZQQDFNen9xEBws4JPaMOpU5WiBsEMc1l3MK9/pub?output=csv';
     
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    
-    slides[slideIndex - 1].style.display = "block";
-    updateCounter(slideIndex, slides.length);
-}
+    let currentIdx = 0;
+    let totalSlides = 0;
+    let slideTimer;
 
-function updateCounter(current, total) {
-    const counter = document.getElementById("slide-num");
-    if (counter) {
-        counter.innerText = `${current} / ${total}`;
-    }
-}
+    async function loadSlides() {
+        try {
+            const response = await fetch(`${csvUrl}&cachebust=${Date.now()}`);
+            const data = await response.text();
+            
+            // Split rows and skip header
+            const rows = data.split(/\r?\n/).filter(row => row.trim() !== "");
+            const slideData = rows.slice(1); 
+            
+            const container = document.getElementById('slide-inner');
+            container.innerHTML = ''; // Clear "Loading..."
 
-// Start the script
-document.addEventListener("DOMContentLoaded", initSlideshow);
+            totalSlides = slideData.length;
+
+            slideData.forEach((row) => {
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                const link = cols[1]?.replace(/"/g, "").trim();
+                const imgSrc = cols[2]?.replace(/"/g, "").trim();
+                const altText = cols[3]?.replace(/"/g, "").trim();
+
+                if (imgSrc) {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'mySlides';
+                    slideDiv.onclick = () => window.location.href = link;
+                    slideDiv.innerHTML = `<img src="${imgSrc}" alt="${altText}">`;
+                    container.appendChild(slideDiv);
+                }
+            });
+
+            updateSlide(); // Set initial position
+            startAutoSlide();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('slide-num').innerText = "Error Loading";
+        }
+    }
+
+    function updateSlide() {
+        const slideInner = document.getElementById('slide-inner');
+        if (slideInner && totalSlides > 0) {
+            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
+            document.getElementById('slide-num').innerText = `${currentIdx + 1} / ${totalSlides}`;
+        }
+    }
+
+    function moveSlide(direction) {
+        currentIdx += direction;
+        if (currentIdx >= totalSlides) currentIdx = 0;
+        if (currentIdx < 0) currentIdx = totalSlides - 1;
+        updateSlide();
+        resetTimer();
+    }
+
+    function startAutoSlide() {
+        slideTimer = setInterval(() => moveSlide(1), 5000);
+    }
+
+    function resetTimer() {
+        clearInterval(slideTimer);
+        startAutoSlide();
+    }
+
+    // Start the process
+    loadSlides();
+</script>
+ <div class="w-full h-auto bg-black flex items-center justify-center shadow-inner overflow-hidden">
+    <video 
+        src="asset/vid/prevideo.mp4" 
+        class="w-full h-auto max-h-[500px] block" 
+        autoplay 
+        loop 
+        muted 
+        playsinline>
+        [KLL VIDEO]
+    </video>
+</div>
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
+        <div class="text-center py-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
+                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
+                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
+                    <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-6">
+            <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">View Announcements</button>
+            <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'CollCalendar.html';">KLL Collegiate Calendar</button>
+            <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'facilities.html';">FACILITIES</button>
+            <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'gallery.html';">GALLERY</button>
+        </div>
+
+        <div class="text-left py-4">
+            <div id='image-preview' class="text-center py-3" style="color:red"><h1 class="text-6xl font-black text-gray-800 tracking-tighter">THIS IS KLL</h1> </div>
+            <section class="logo-body-wrapper" id="dynamic-logo-section">
+                <div class="parent-logo">
+                    <div class="k-stem d-box straight" onclick="window.location.href='about.html';" data-bg="asset/img/aboutus.jpg"><div class="text-inner">ABOUT</div></div>
+                    <div class="k-top d-box slant-left" onclick="window.location.href='kll-info.html';"><div class="text-inner">E</div></div>
+                    <div class="k-bot d-box slant-right" onclick="window.location.href='pride.html';"><div class="text-inner">PRIDE</div></div>
+                    <div class="l1-stem d-box straight" onclick="window.location.href='student_login.html';"><div class="text-inner">STUDENT PORTAL</div></div>
+                    <div class="l1-base d-box base" onclick="window.location.href='admission.html';"><div class="text-inner">GO</div></div>
+                    <div class="l2-stem d-box straight" onclick="window.location.href='elibrary.html';"><div class="text-inner">E LIBRARY</div></div>
+                    <div class="l2-base d-box base" onclick="window.location.href='contact.html';"><div class="text-inner">END</div></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="max-w-4xl mx-auto mb-8 px-4">
+        <div class="bg-white border-l-8 border-yellow-500 rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center gap-6">
+            <div class="text-4xl">💡</div>
+            <div>
+                <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400">Daily Inspiration for KLLians</h3>
+                <p id="inspiration-text" class="text-xl text-kll-maroon font-serif italic mt-1">Loading wisdom...</p>
+                <button onclick="fetchInspiration()" class="mt-3 text-xs text-yellow-600 hover:underline font-bold">Get New Advice →</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-8">
+        <p>&copy; 2026 Kolehiyo ng Lungsod ng Lipa</p>
+        <div class="mt-4">
+            <a href="admin-login.html" class="text-gray-500 hover:text-white text-xs transition">Administrator Login</a>
+        </div>
+    </footer>
+
+    <button class="back-to-top fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hidden z-50 cursor-pointer border-2 border-white" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        &uarr;
+    </button>
+
+    <script src="alert.js"></script>
+    <script src="navbar.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="admin.js"></script>
+    <script src="logoHover.js"></script>
+    <script>
+       
+
+        // Back to Top script
+        window.addEventListener('scroll', function() {
+            const button = document.querySelector('.back-to-top');
+            window.pageYOffset > 100 ? button.classList.remove('hidden') : button.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
