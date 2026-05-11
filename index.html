@@ -103,37 +103,86 @@
     </nav>
 
 <div class="slideshow-wrapper border-b-4 border-yellow-500">
-    <div class="slide-counter" id="slide-num">1 / --</div>
-    
+    <div class="slide-counter" id="slide-num">Loading...</div>
     <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
     <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
 
     <div class="slides-container" id="slide-inner">
-        <!-- Slides will be injected here from the Google Sheet[cite: 1] -->
-    </div>
-</div>
-
-<script src="slideshow.js"></script>
-    <div class="slideshow-wrapper border-b-4 border-yellow-500">
-        <div class="slide-counter" id="slide-num">1 / 11</div>
-        <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
-
-        <div class="slides-container" id="slide-inner">
-        <div class="mySlides" onclick="window.location.href='index.html';"><img src="asset/img/index.jpg" alt="Slide 1"></div>
-        <div class="mySlides" onclick="window.location.href='student_login.html';"><img src="asset/img/studentportal.jpg" alt="Slide 2"></div>
-        <div class="mySlides" onclick="window.location.href='elibrary.html';"><img src="asset/img/elibrary.jpg" alt="Slide 3"></div>
-        <div class="mySlides" onclick="window.location.href='about.html';"><img src="asset/img/aboutus.jpg" alt="Slide 4"></div>
-        <div class="mySlides" onclick="window.location.href='includes/course.html?module=ccs';"><img src="asset/img/ccs_logo.jpg" alt="Slide 5"></div>
-        <div class="mySlides" onclick="window.location.href='includes/course.html?module=cca';"><img src="asset/img/cca_logo.jpg" alt="Slide 6"></div>
-         <div class="mySlides" onclick="window.location.href='includes/course.html?module=bsba';"><img src="asset/img/bsba_logo.jpg" alt="Slide 7"></div>
-            <div class="mySlides" onclick="window.location.href='includes/course.html?module=ccj';"><img src="asset/img/ccj_logo.jpg" alt="Slide 8"></div>
-            <div class="mySlides" onclick="window.location.href='includes/course.html?module=ceas';"><img src="asset/img/ceas_logo.jpg" alt="Slide 9"></div>
-            <div class="mySlides" onclick="window.location.href='includes/course.html?module=cn';"><img src="asset/img/cn_logo.jpg" alt="Slide 10"></div>
-            <div class="mySlides" onclick="window.location.href='includes/course.html?module=kllsec';"><img src="asset/img/kllSEC_logo.jpg" alt="Slide 11"></div>
-<div class="mySlides" onclick="window.location.href='admission.html';"><img src="asset/img/admpro.jpg" alt="Slide 12"></div>
         </div>
-    </div>
+</div>
+<script>
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwnuTgVmucNQmw8Dllle4tYR5qq9rZjHrMLrTo0QRxZQQDFNen9xEBws4JPaMOpU5WiBsEMc1l3MK9/pub?output=csv';
+    
+    let currentIdx = 0;
+    let totalSlides = 0;
+    let slideTimer;
+
+    async function loadSlides() {
+        try {
+            const response = await fetch(`${csvUrl}&cachebust=${Date.now()}`);
+            const data = await response.text();
+            
+            // Split rows and skip header
+            const rows = data.split(/\r?\n/).filter(row => row.trim() !== "");
+            const slideData = rows.slice(1); 
+            
+            const container = document.getElementById('slide-inner');
+            container.innerHTML = ''; // Clear "Loading..."
+
+            totalSlides = slideData.length;
+
+            slideData.forEach((row) => {
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                const link = cols[1]?.replace(/"/g, "").trim();
+                const imgSrc = cols[2]?.replace(/"/g, "").trim();
+                const altText = cols[3]?.replace(/"/g, "").trim();
+
+                if (imgSrc) {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'mySlides';
+                    slideDiv.onclick = () => window.location.href = link;
+                    slideDiv.innerHTML = `<img src="${imgSrc}" alt="${altText}">`;
+                    container.appendChild(slideDiv);
+                }
+            });
+
+            updateSlide(); // Set initial position
+            startAutoSlide();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('slide-num').innerText = "Error Loading";
+        }
+    }
+
+    function updateSlide() {
+        const slideInner = document.getElementById('slide-inner');
+        if (slideInner && totalSlides > 0) {
+            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
+            document.getElementById('slide-num').innerText = `${currentIdx + 1} / ${totalSlides}`;
+        }
+    }
+
+    function moveSlide(direction) {
+        currentIdx += direction;
+        if (currentIdx >= totalSlides) currentIdx = 0;
+        if (currentIdx < 0) currentIdx = totalSlides - 1;
+        updateSlide();
+        resetTimer();
+    }
+
+    function startAutoSlide() {
+        slideTimer = setInterval(() => moveSlide(1), 5000);
+    }
+
+    function resetTimer() {
+        clearInterval(slideTimer);
+        startAutoSlide();
+    }
+
+    // Start the process
+    loadSlides();
+</script>
  <div class="w-full h-auto bg-black flex items-center justify-center shadow-inner overflow-hidden">
     <video 
         src="asset/vid/prevideo.mp4" 
@@ -208,37 +257,13 @@
         &uarr;
     </button>
 
-
+    <script src="alert.js"></script>
     <script src="navbar.js"></script>
     <script src="js/animation.js"></script>
     <script src="admin.js"></script>
     <script src="logoHover.js"></script>
     <script>
-        // Slideshow Logic
-        let currentIdx = 0;
-        const slides = document.querySelectorAll('.mySlides');
-        const slideInner = document.getElementById('slide-inner');
-        const slideNum = document.getElementById('slide-num');
-
-        function updateSlide() {
-            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-            slideNum.innerText = `${currentIdx + 1} / ${slides.length}`;
-        }
-
-        function moveSlide(direction) {
-            currentIdx += direction;
-            if (currentIdx >= slides.length) currentIdx = 0;
-            if (currentIdx < 0) currentIdx = slides.length - 1;
-            updateSlide();
-            resetTimer();
-        }
-
-        let slideTimer = setInterval(() => moveSlide(1), 5000);
-
-        function resetTimer() {
-            clearInterval(slideTimer);
-            slideTimer = setInterval(() => moveSlide(1), 5000);
-        }
+       
 
         // Back to Top script
         window.addEventListener('scroll', function() {
