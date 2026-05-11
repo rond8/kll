@@ -1,5 +1,5 @@
 // configuration
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6iiH63-2l4HJYVty_FTSOyxtmDptReJX2BSBjnj5u_hfWYYbkhEY0LTTH0ZCQRAg/exec"; 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKTUdNYNKaMjS_XD7i4V7OUlie2gike5sWQhkQ3Uje9Plsmt9RrtquzLpxMAg-iA/exec"; 
 
 let slideIndex = 1;
 
