@@ -366,3 +366,116 @@ footer {
         font-size: 1.125rem; /* text-lg */
     }
 }
+
+
+/* --- STUDENT LOGIN ENHANCEMENTS --- */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #f4f4f4; /* Subtle background to make the white card pop */
+    min-height: calc(100vh - 400px); /* Adjust based on your header height */
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-top: 5px solid var(--kll-maroon);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header .lock-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 0.85rem;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: var(--kll-maroon);
+    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--kll-maroon);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background-color: #a00000;
+}
+
+.login-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.login-footer a {
+    color: var(--kll-maroon);
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+#result {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* --- CENTERED PORTAL UI --- */
+.portal-container {
+    display: flex;
+    justify-content: center; /* Horizontal Center */
+    align-items: center;     /* Vertical Center */
+    min-height: 70vh;        /* Ensures there is space to center within */
+    padding: 2rem 1rem;
+}
