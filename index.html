@@ -40,78 +40,40 @@
     <div class="slides-container" id="slide-inner">
         </div>
 </div>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Vision -->
+              <div onclick="window.location.href='student_login.html';" class="card bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6 hover:shadow-xl transition-shadow">
+              <img src="asset/img/studentportal.jpg" alt="" srcset="">
+            </div>
+
+              <div onclick="window.location.href='elibrary.html';" class="card bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6 hover:shadow-xl transition-shadow">
+              <img src="asset/img/elibrary.jpg" alt="" srcset="">
+            </div>
+            <div class="card bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6 hover:shadow-xl transition-shadow">
+                <h2 class="text-2xl font-bold text-kll-maroon mb-4 flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    KLL Vision
+                </h2>
+                <p class="text-gray-700 leading-relaxed">
+                    A center of human development committed to the pursuit of wisdom, truth, justice, pride, dignity, local and global competitiveness via a quality and free education for all qualified clients.
+                </p>
+            </div>
+
+            <!-- Mission -->
+            <div class="card bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 p-6 hover:shadow-xl transition-shadow">
+                <h2 class="text-2xl font-bold text-yellow-600 mb-4 flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    KLL Mission
+                </h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Established and maintain an academic environment promoting the pursuit of excellence and the total development of its students as human beings, with fear of God, love of country and fellowmen.
+                </p>
+            </div>
+         
+
+        </div>
 <script>
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwnuTgVmucNQmw8Dllle4tYR5qq9rZjHrMLrTo0QRxZQQDFNen9xEBws4JPaMOpU5WiBsEMc1l3MK9/pub?output=csv';
-    
-    let currentIdx = 0;
-    let totalSlides = 0;
-    let slideTimer;
-
-    async function loadSlides() {
-        try {
-            const response = await fetch(`${csvUrl}&cachebust=${Date.now()}`);
-            const data = await response.text();
-            
-            // Split rows and skip header
-            const rows = data.split(/\r?\n/).filter(row => row.trim() !== "");
-            const slideData = rows.slice(1); 
-            
-            const container = document.getElementById('slide-inner');
-            container.innerHTML = ''; // Clear "Loading..."
-
-            totalSlides = slideData.length;
-
-            slideData.forEach((row) => {
-                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                const link = cols[1]?.replace(/"/g, "").trim();
-                const imgSrc = cols[2]?.replace(/"/g, "").trim();
-                const altText = cols[3]?.replace(/"/g, "").trim();
-
-                if (imgSrc) {
-                    const slideDiv = document.createElement('div');
-                    slideDiv.className = 'mySlides';
-                    slideDiv.onclick = () => window.location.href = link;
-                    slideDiv.innerHTML = `<img src="${imgSrc}" alt="${altText}">`;
-                    container.appendChild(slideDiv);
-                }
-            });
-
-            updateSlide(); // Set initial position
-            startAutoSlide();
-            
-        } catch (error) {
-            console.error('Error:', error);
-            document.getElementById('slide-num').innerText = "Error Loading";
-        }
-    }
-
-    function updateSlide() {
-        const slideInner = document.getElementById('slide-inner');
-        if (slideInner && totalSlides > 0) {
-            slideInner.style.transform = `translateX(-${currentIdx * 100}%)`;
-            document.getElementById('slide-num').innerText = `${currentIdx + 1} / ${totalSlides}`;
-        }
-    }
-
-    function moveSlide(direction) {
-        currentIdx += direction;
-        if (currentIdx >= totalSlides) currentIdx = 0;
-        if (currentIdx < 0) currentIdx = totalSlides - 1;
-        updateSlide();
-        resetTimer();
-    }
-
-    function startAutoSlide() {
-        slideTimer = setInterval(() => moveSlide(1), 5000);
-    }
-
-    function resetTimer() {
-        clearInterval(slideTimer);
-        startAutoSlide();
-    }
-
-    // Start the process
-    loadSlides();
+  
 </script>
  <div class="w-full h-auto bg-black flex items-center justify-center shadow-inner overflow-hidden">
     <video 
@@ -186,7 +148,7 @@
     <button class="back-to-top fixed bottom-6 right-6 bg-kll-maroon text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hidden z-50 cursor-pointer border-2 border-white" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
         &uarr;
     </button>
-
+<script src="slideshow.js"></script>
     <script src="alert.js"></script>
     <script src="navbar.js"></script>
     <script src="js/animation.js"></script>
