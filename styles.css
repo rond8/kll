@@ -1,29 +1,24 @@
-
- html { scroll-behavior: smooth; }
-*{
-box-sizing:border-box;
+/* --- GLOBAL STYLES --- */
+html { 
+    scroll-behavior: smooth; 
 }
 
-body{ 
-margin:0;
+* {
+    box-sizing: border-box;
 }
 
-/* School Icon */
-#schoolicon{
-float:left;
-height: 100px;
-margin-right:20px;
-border-radius:5%;
-width:150px;
-max-width:100%;
+body { 
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Header */
-header{
-background:red;
-color:white;
-padding:0;
-text-align:center;
+/* --- HEADER & BRANDING --- */
+header {
+    background: red;
+    color: white;
+    padding: 0;
+    text-align: center;
+    position: relative;
 }
 
 header img {
@@ -31,13 +26,49 @@ header img {
     height: auto;
 }
 
-h1{
-margin:0;
+#schoolicon {
+    float: left;
+    height: 100px;
+    margin-right: 20px;
+    border-radius: 5%;
+    width: 150px;
+    max-width: 100%;
 }
 
-/* Navigation */
-header {
-    position: relative;
+h1 { margin: 0; }
+h2, h3 { color: red; }
+
+/* --- NAVIGATION (Right Aligned) --- */
+nav {
+    background: #333;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Pushes items to the right */
+}
+
+nav ul li {
+    min-width: 120px;
+}
+
+nav ul li a {
+    display: block;
+    padding: 16px 14px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background: #8c0202; /* Maroon Hover */
 }
 
 .nav-toggle {
@@ -55,348 +86,170 @@ header {
     z-index: 1000;
 }
 
-nav{
-background:#333;
-}
-
-nav ul{
-list-style:none;
-margin:0;
-padding:0;
-display:flex;
-flex-wrap:wrap;
-}
-
-nav ul li{
-flex:1;
-min-width:120px;
-}
-
-nav ul li a{
-display:block;
-padding:14px;
-text-align:center;
-text-decoration:none;
-color:white;
-}
-
-nav ul li a:hover{
-background:#8c0202;
-}
-
-/* Notification badge for nav items */
+/* Badge for "New" content */
 .nav-badge {
-  display: inline-block;
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  background: #db3434;
-  margin-left: 0.4rem;
-  vertical-align: middle;
-}
-
-.nav-badge.hidden {
-  display: none;
-}
-
-/* Content */
-section{
-padding:40px;
-max-width:1200px;
-margin:auto;
-}
-
-/* Footer */
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:15px;
-}
-
-/* Announcement Modal */
-
-.modal{
-display:none;
-position:fixed;
-z-index:999;
-padding-top:120px;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background-color:rgba(0,0,0,0.6);
-opacity: 0;
-visibility: hidden;
-transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal.show {
-display: block;
-opacity: 1;
-visibility: visible;
-}
-
-.modal-content{
-background:white;
-margin:auto;
-padding:20px;
-width:90%;
-max-width:700px;
-max-height:70vh;
-border-radius:8px;
-text-align:center;
-overflow-y:auto;
-animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-from {
-    transform: translateY(-50px);
-    opacity: 0;
-}
-to {
-    transform: translateY(0);
-    opacity: 1;
-}
-}
-
-.close{
-float:right;
-font-size:28px;
-cursor:pointer;
-}
-
-/* Loading Spinner */
-.loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #db3434;
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.6rem;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
+    background: #db3434;
+    margin-left: 0.4rem;
+    vertical-align: middle;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Login */
-
-#login{
-width:90%;
-max-width:300px;
-margin:40px auto;
-background:white;
-padding:20px;
-border-radius:5px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-/* Inputs */
-
-input{
-width:100%;
-padding:10px;
-margin:8px 0;
-}
-
-/* Image */
-
-#cimg{
-width:100%;
-height:auto;
-max-width:752px;
-}
-
-/* Result */
-
-#result{
-width:90%;
-max-width:700px;
-margin:20px auto;
-background:white;
-padding:20px;
-border-radius:5px;
-}
-
-/* Loading Image */
-
-#loading {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-}
-
-/* Table */
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-overflow-x:auto;
-display:block;
-}
-
-th,td{
-border:1px solid #ff0000;
-padding:8px;
-text-align:left;
-}
-
-th{
-background:#f0f0f0;
-}
-
-/* Headings */
-
-h2,h3{
-font-family: Arial, sans-serif;
-color:red;
-}
-
-/* Links */
-
-a{
-color:#8c0202;
-text-decoration:none;
-}
-
-/* Card Styles */
-.card{
-    background:rgb(226, 176, 176);
-    border-radius:10px;
-    padding:20px;
-    margin:20px 0;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card h2{
-    color:#5e3434;
-    border-bottom:2px solid #db3434;
-    padding-bottom:8px;
-}
-
-/* Announcement Button */
-.announcement-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px 0;
-}
-
-.announcement-btn:hover {
-    background: #8c0202;
-}
-
-/* Responsive Breakpoints */
-
-/* Tablets */
-@media (max-width: 768px){
-
-header{
-padding:0;
-}
-
-header img {
-    max-height: 250px; /* Medium height on tablets */
-}
-
-section{
-padding:20px;
-}
-
-nav {
-    display: block;
+/* --- SLIDESHOW SECTION --- */
+.slideshow-wrapper {
     position: relative;
     width: 100%;
-    background: #333;
-    z-index: 999;
+    height: 450px;
+    background-color: #1a1a1a;
+    overflow: hidden;
 }
 
-nav.open ul {
+.slides-container {
     display: flex;
+    transition: transform 0.6s ease-in-out;
+    height: 100%;
 }
 
-nav ul{
-    display: none;
-    flex-direction:column;
+.mySlides {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
-nav ul li{
-    width:100%;
-    min-width:0;
+.mySlides img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
-nav ul li a{
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(128, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    z-index: 10;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+    transition: 0.3s;
 }
 
-#schoolicon{
-float:left;
-display:block;
-height: 100px;
+.next { right: 0; border-radius: 5px 0 0 5px; }
+
+/* --- GEOMETRIC LOGO (KLL) --- */
+.logo-body-wrapper { 
+    display: flex; 
+    justify-content: center; 
+    padding: 2rem 0; 
+    overflow-x: auto; 
 }
 
-.nav-toggle {
-    display: block;
+.parent-logo { 
+    display: grid; 
+    grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); 
+    grid-template-rows: repeat(5, clamp(40px, 8vw, 70px)); 
+    grid-column-gap: 8px; 
+    transform: skewX(-5deg); 
 }
 
-}
-/* Phones */
-@media (max-width: 480px){
-
-h1{
-font-size:22px;
-}
-
-body {
-    padding: 0 10px;
-}
-
-header {
-    text-align: center;
+.d-box { 
+    position: relative; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: white; 
+    font-weight: bold; 
+    font-size: clamp(8px, 1.5vw, 12px); 
+    z-index: 1; 
+    cursor: pointer; 
+    transition: transform 0.2s ease; 
 }
 
-header img {
-    float: none;
-    width: 100%;
-    max-height: none;
+.d-box::before { 
+    content: ""; 
+    position: absolute; 
+    top: 0; left: 0; right: 0; bottom: 0; 
+    background-color: #800000; 
+    z-index: -1; 
+}
+
+.text-inner { transform: skewX(5deg); padding: 2px; }
+.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
+.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
+.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
+.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
+
+.k-stem { grid-area: 1 / 1 / 6 / 2; } 
+.k-top { grid-area: 1 / 2 / 4 / 3; } 
+.k-bot { grid-area: 3 / 2 / 6 / 3; } 
+.l1-stem { grid-area: 1 / 4 / 6 / 5; } 
+.l1-base { grid-area: 5 / 5 / 6 / 6; } 
+.l2-stem { grid-area: 1 / 7 / 6 / 8; } 
+.l2-base { grid-area: 5 / 8 / 6 / 9; }
+
+/* --- CONTENT & CARDS --- */
+section {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .card {
+    background: rgb(226, 176, 176);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+/* --- MODAL STYLES --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 120px;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal.show { display: block; opacity: 1; visibility: visible; }
+
+.modal-content {
+    background: white;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 8px;
+    text-align: center;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- FOOTER & MISC --- */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
     padding: 15px;
-    margin: 12px 0;
 }
 
-.announcement-btn {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.modal-content{
-width:95%;
-}
-
-#login{
-margin:20px auto;
-}
-
-}
-
-/* Back to Top Button */
 .back-to-top {
     position: fixed;
     bottom: 20px;
@@ -407,166 +260,109 @@ margin:20px auto;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    font-size: 20px;
     cursor: pointer;
     display: none;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: opacity 0.3s;
 }
 
-.back-to-top:hover {
-    background: #8c0202;
-}
-/* --- RESPONSIVE GEOMETRIC LOGO --- */
-.logo-body-wrapper {
-    width: 100%;
-    max-width: 800px; /* Limits size on large desktops */
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    display: flex;
-    justify-content: center;
-}
-
-.parent-logo {
-    display: grid;
-    /* Uses container width (%) to determine cell size */
-    grid-template-columns: repeat(9, 1fr); 
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 1%;
-    /* Maintain a consistent shape regardless of screen size */
-    width: 100%;
-    aspect-ratio: 9 / 5; 
-    transform: skewX(-5deg);
-}
-
-.d-box {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: bold;
-    /* Font size scales based on logo width */
-    font-size: 1.5vw; 
-    text-align: center;
-    z-index: 1;
-}
-
-/* On very small screens, make font slightly larger so it stays readable */
-@media (max-width: 640px) {
-    .d-box { font-size: 2.5vw; }
-}
-/* On very large screens, cap the font size */
-@media (min-width: 1024px) {
-    .d-box { font-size: 14px; }
-}
-
-.d-box::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #800000;
-    z-index: -1;
-    transition: background-color 0.3s ease;
-}
-
-.text-inner { transform: skewX(5deg); padding: 2px; line-height: 1; }
-
-/* Polygon shapes stay responsive because percentages are relative to the cell */
-.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
-.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
-.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
-.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
-
-/* Grid areas remain the same */
-.k-stem { grid-area: 1 / 1 / 6 / 2; }
-.k-top  { grid-area: 1 / 2 / 4 / 3; }
-.k-bot  { grid-area: 3 / 2 / 6 / 3; }
-.l1-stem { grid-area: 1 / 4 / 6 / 5; }
-.l1-base { grid-area: 5 / 5 / 6 / 6; }
-.l2-stem { grid-area: 1 / 7 / 6 / 8; }
-.l2-base { grid-area: 5 / 8 / 6 / 9; }
-
-#image-preview {
-    /* ... existing styles ... */
-    background-repeat: no-repeat;
-    /* Added background-image to the transition */
-    transition: background-color 0.5s ease, background-image 0.5s ease, border-radius 0.5s ease;
-}
-
-        .bg-kll-maroon { background-color: #800000; }
-          .text-kll-maroon { color: #800000; }
-        .border-kll-maroon { border-color: #800000; }
-        
-        .slideshow-wrapper {
-            position: relative;
-            width: 100%;
-            height: 450px;
-            background-color: #1a1a1a;
-            overflow: hidden;
-        }
-
-        .slides-container {
-            display: flex;
-            transition: transform 0.6s ease-in-out;
-            height: 100%;
-        }
-
-        .mySlides {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .mySlides img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* --- NAVIGATION BUTTONS --- */
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(128, 0, 0, 0.7);
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            border: none;
-            z-index: 10;
-            font-weight: bold;
-            border-radius: 0 5px 5px 0;
-            transition: 0.3s;
-        }
-        .nav-btn:hover { background: #800000; }
-        .next { right: 0; border-radius: 5px 0 0 5px; }
-
-        .slide-counter {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            z-index: 11;
-        }
-
-        /* --- LOGO CSS (PRESERVED) --- */
-        .logo-body-wrapper { display: flex; justify-content: center; padding: 2rem 0; overflow-x: auto; transition: background-color 0.5s ease, border-radius 0.5s ease; }
-        .parent-logo { display: grid; grid-template-columns: repeat(9, clamp(40px, 8vw, 70px)); grid-template-rows: repeat(5, clamp(40px, 8vw, 70px)); grid-column-gap: 8px; transform: skewX(-5deg); }
-        .d-box { position: relative; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: clamp(8px, 1.5vw, 12px); text-align: center; z-index: 1; cursor: pointer; transition: transform 0.2s ease; }
-        .d-box:hover { transform: scale(1.05); z-index: 10; }
-        .d-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #800000; z-index: -1; transition: background-color 0.3s ease; }
-        .text-inner { transform: skewX(5deg); padding: 2px; }
-        .slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
-        .slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
-        .straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
-        .base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
-        .k-stem { grid-area: 1 / 1 / 6 / 2; } .k-top { grid-area: 1 / 2 / 4 / 3; } .k-bot { grid-area: 3 / 2 / 6 / 3; } .l1-stem { grid-area: 1 / 4 / 6 / 5; } .l1-base { grid-area: 5 / 5 / 6 / 6; } .l2-stem { grid-area: 1 / 7 / 6 / 8; } .l2-base { grid-area: 5 / 8 / 6 / 9; }
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .nav-toggle { display: block; }
     
+    nav ul {
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0;
+    }
+
+    nav.open ul { display: flex; }
+
+    nav ul li { width: 100%; }
+    
+    nav ul li a {
+        text-align: left;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .slideshow-wrapper { height: 300px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    header img { float: none; width: 100%; }
+}
+/* Custom Variable for your Maroon color */
+:root {
+    --kll-maroon: #800000;
+}
+
+/* Sticky Wrapper */
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+/* Navbar Background and Shadow */
+.main-navbar {
+    background-color: var(--kll-maroon);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Container limits width and centers content */
+.nav-container {
+    max-width: 1280px; /* Equivalent to max-w-7xl */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Flex layout for the bar */
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px; /* Equivalent to h-16 */
+}
+
+.brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Equivalent to gap-3 */
+}
+
+/* The Logo Box */
+.logo-box {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.logo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Typography */
+.brand-name {
+    font-weight: bold;
+    font-size: 1.25rem; /* text-xl */
+    letter-spacing: 0.025em; /* tracking-wide */
+}
+
+/* Tablet/Mobile Font Size Adjustment */
+@media (max-width: 640px) {
+    .brand-name {
+        font-size: 1.125rem; /* text-lg */
+    }
+}

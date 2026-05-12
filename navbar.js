@@ -5,7 +5,6 @@ const navbar = `
 <nav id="mainNav" class="nav">
 <ul>
 <li><a href="/index.html">HOME</a></li>
-<li><a href="/news.html" id="nav-news">NEWS<span class="nav-badge" aria-label="New content"></span></a></li>
 <li><a href="/admission.html">ADMISSION</a></li>
 <li><a href="/about.html">ABOUT US</a></li>
 <li><a href="/programs.html">PROGRAMS</a></li>
