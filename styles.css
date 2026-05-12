@@ -1,15 +1,27 @@
 /* --- GLOBAL STYLES --- */
-html { 
-    scroll-behavior: smooth; 
+:root {
+    --font-body: 'Merriweather', Georgia, 'Times New Roman', serif;
+    --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
 }
 
 * {
     box-sizing: border-box;
 }
 
-body { 
+body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand-name,
+nav ul li a {
+    font-family: var(--font-heading);
 }
 
 /* --- HEADER & BRANDING --- */

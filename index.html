@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KLL EDUCATIONAL SITE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+<body class="bg-gray-50 text-gray-800 leading-relaxed">
 
   
    <link rel="stylesheet" href="style.css">
@@ -74,8 +77,23 @@
             </div>
        
         </div>
-
-         <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="text-center py-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
+                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
+                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
+                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
+                    <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
+                </div>
+            </div>
+        </div>
+         <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
               
               <div onclick="window.location.href='includes/course.html?module=ccs';" class="card bg-white rounded-xl shadow-lg border-t-4 border-kll-maroon p-6 hover:shadow-xl transition-shadow">
                <h2 class="text-2xl font-bold text-red-600 mb-4 flex items-center gap-2"> CCS Department </h2>
@@ -119,22 +137,7 @@
     </video>
 </div>
     <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col gap-8">
-        <div class="text-center py-3">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-red-800">
-                    <p class="text-gray-500 text-xs font-bold uppercase">Total Students</p>
-                    <p id="stat-total-students" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
-                    <p class="text-gray-500 text-xs font-bold uppercase">Active Courses</p>
-                    <p id="stat-active-courses" class="text-4xl font-black text-gray-800 tracking-tighter">...</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-b-4 border-yellow-500">
-                    <p class="text-gray-500 text-xs font-bold uppercase">SINCE</p>
-                    <p class="text-2xl font-black text-gray-800 tracking-tighter">February 14, 1994</p>
-                </div>
-            </div>
-        </div>
+
 
         <div class="flex flex-wrap gap-3 mt-6">
             <button class="announcement-btn bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 text-lg" onclick="window.location.href = 'announcements.html';">View Announcements</button>
