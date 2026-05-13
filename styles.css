@@ -193,19 +193,7 @@ nav ul li a:hover {
     z-index: -1; 
 }
 
-.text-inner { transform: skewX(5deg); padding: 2px; }
-.slant-right::before { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); }
-.slant-left::before  { clip-path: polygon(30% 0, 100% 0, 70% 100%, 0% 100%); }
-.straight::before    { clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%); }
-.base::before        { clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); }
 
-.k-stem { grid-area: 1 / 1 / 6 / 2; } 
-.k-top { grid-area: 1 / 2 / 4 / 3; } 
-.k-bot { grid-area: 3 / 2 / 6 / 3; } 
-.l1-stem { grid-area: 1 / 4 / 6 / 5; } 
-.l1-base { grid-area: 5 / 5 / 6 / 6; } 
-.l2-stem { grid-area: 1 / 7 / 6 / 8; } 
-.l2-base { grid-area: 5 / 8 / 6 / 9; }
 
 /* --- CONTENT & CARDS --- */
 section {
@@ -491,3 +479,22 @@ footer {
     min-height: 70vh;        /* Ensures there is space to center within */
     padding: 2rem 1rem;
 }
+
+#slidetext {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    background-color: maroon;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+    z-index: 9999;
+  }
+
+  #slidetext:hover {
+    background-color: #5e0000; /* Darker maroon */
+    transform: scale(1.1);     /* Slight zoom effect */
+    cursor: pointer;
+  }
