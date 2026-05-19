@@ -1,12 +1,11 @@
 // student.js
 
-const apiURL = "https://script.google.com/macros/s/AKfycbw7wGp9i_-RWwbUB0oAu4XvBgHzEUMepboWo9plOP1gNOESI_PSumG_mKEhXXjbRQQ/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbwvCtpL6GBg83hmsKwniKlRmtAHOS6trmXTgKPaW5yiJWGE2uKlM7EvxhXgv-xY63c/exec";
 
 let currentUser = null;
 let currentPass = null;
 let isLoading = false;
 
-// Map numeric years to display strings
 const yearMap = {
   1: "1st year",
   2: "2nd year",
@@ -17,10 +16,8 @@ const yearMap = {
 function login(usernameInput = null, passwordInput = null) {
   if (isLoading) return;
 
-  // FIX: Safely check if inputs were passed as arguments first before checking the DOM
   const username = usernameInput ? usernameInput : (document.getElementById("username") ? document.getElementById("username").value.trim() : "");
   const password = passwordInput ? passwordInput : (document.getElementById("password") ? document.getElementById("password").value.trim() : "");
-
   const resultDiv = document.getElementById("result");
 
   if (!username || !password) {
@@ -31,9 +28,10 @@ function login(usernameInput = null, passwordInput = null) {
   isLoading = true;
   if (resultDiv) resultDiv.innerText = "Logging in...";
 
+  // CORRECTED: Fixed parameters query concatenation with correct formatting (&)
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
-    "?password=" + encodeURIComponent(password) +
+    "&password=" + encodeURIComponent(password) +
     "&t=" + Date.now();
 
   fetch(url)
@@ -45,10 +43,8 @@ function login(usernameInput = null, passwordInput = null) {
         currentUser = username;
         currentPass = password;
 
-        // Sort grades by year and semester
         data.grades.sort((a, b) => a.year - b.year || a.semester - b.semester);
 
-        // Group grades by year
         const grouped = {
           "1st year": [],
           "2nd year": [],
@@ -77,7 +73,7 @@ function login(usernameInput = null, passwordInput = null) {
                 <td>${g.coursecode}</td>
                 <td>${g.subject}</td>
                 <td>${g.teacher}</td>
-                <td>${g.grade}</td>
+                <td><strong>${g.grade}</strong></td>
               </tr>
             `;
           });
@@ -118,15 +114,10 @@ function login(usernameInput = null, passwordInput = null) {
           </div>
         `;
 
-        if (resultDiv) {
-          resultDiv.innerHTML = html;
-        }
+        if (resultDiv) resultDiv.innerHTML = html;
         
-        // Hide the login card safely
         const loginCard = document.getElementById("login");
-        if (loginCard) {
-          loginCard.style.display = "none";
-        }
+        if (loginCard) loginCard.style.display = "none";
 
       } else {
         if (resultDiv) resultDiv.innerText = "❌ Invalid username or password.";
@@ -141,8 +132,6 @@ function login(usernameInput = null, passwordInput = null) {
     });
 }
 
-// Press Enter to login
-// Wrapped in a DOMContentLoaded check to ensure it attaches reliably
 document.addEventListener("DOMContentLoaded", () => {
   const passwordField = document.getElementById("password");
   if (passwordField) {
@@ -152,14 +141,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Refresh grades for current user
 function refreshGrades() {
   if (currentUser && currentPass) {
     login(currentUser, currentPass);
   }
 }
 
-// Logout
 function logout() {
   currentUser = null;
   currentPass = null;
