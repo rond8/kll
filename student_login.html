@@ -16,8 +16,10 @@
         </div>
     </header>
 
-    <!-- Enhanced Login Section -->
-    <main class="portal-container">
+    <!-- Main Portal Wrapper -->
+    <main class="portal-container" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+        
+        <!-- 1. LOGIN SECTION (Will be completely hidden on successful authentication) -->
         <div id="login" class="login-card">
             <div class="login-header">
                 <div class="portal-badge">KLL</div>
@@ -37,17 +39,19 @@
 
             <button class="login-btn" onclick="login()">Login to Portal</button>
             
-            <div id="result"></div>
-
             <div class="login-help">
                 <a href="#">Forgot Password?</a>
                 <span>•</span>
                 <a href="#">Contact Registrar</a>
             </div>
         </div>
+
+        <!-- 2. DATA DISPLAY SECTION (Lives independently so it remains visible) -->
+        <div id="result" style="margin-top: 20px;"></div>
+
     </main>
 
-    <!-- Keep your existing scripts -->
+    <!-- Script loading tags -->
     <script src="student.js"></script>
     <script src="navbar.js"></script>
 </body>
