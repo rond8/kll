@@ -1,6 +1,6 @@
 // student.js
 
-const apiURL = "https://script.google.com/macros/s/AKfycbyDD-6GJgK7ISIZ-9jqqQm4WOZW1JpgtaPK6Zf6nkGRKxm_eKVhy1ILBKzfKQBP5eY/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbylFQOLgi-k-sDp4MdiuyHkgADZjmPHCbZ9aZKU-KgiTwqxm_5sXdWWLaJ5M14xijk/exec";
 
 let currentUser = null;
 let currentPass = null;
