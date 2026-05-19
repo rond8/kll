@@ -17,20 +17,23 @@ const yearMap = {
 function login(usernameInput = null, passwordInput = null) {
   if (isLoading) return;
 
-  const username = usernameInput || document.getElementById("username").value.trim();
-  const password = passwordInput || document.getElementById("password").value.trim();
+  // FIX: Safely check if inputs were passed as arguments first before checking the DOM
+  const username = usernameInput ? usernameInput : (document.getElementById("username") ? document.getElementById("username").value.trim() : "");
+  const password = passwordInput ? passwordInput : (document.getElementById("password") ? document.getElementById("password").value.trim() : "");
+
+  const resultDiv = document.getElementById("result");
 
   if (!username || !password) {
-    document.getElementById("result").innerText = "Enter username and password";
+    if (resultDiv) resultDiv.innerText = "Enter username and password";
     return;
   }
 
   isLoading = true;
-  document.getElementById("result").innerText = "Logging in...";
+  if (resultDiv) resultDiv.innerText = "Logging in...";
 
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
-    "&password=" + encodeURIComponent(password) +
+    "?password=" + encodeURIComponent(password) +
     "&t=" + Date.now();
 
   fetch(url)
@@ -81,9 +84,9 @@ function login(usernameInput = null, passwordInput = null) {
 
           return `
             <h3>${label}</h3>
-            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
               <thead>
-                <tr>
+                <tr style="background-color: #f3f4f6;">
                   <th>Semester</th>
                   <th>Course Code</th>
                   <th>Subject</th>
@@ -95,7 +98,6 @@ function login(usernameInput = null, passwordInput = null) {
                 ${rows}
               </tbody>
             </table>
-            <br>
           `;
         }
 
@@ -109,21 +111,30 @@ function login(usernameInput = null, passwordInput = null) {
         }
 
         html += `
-          <button onclick="logout()">Logout</button>
-          <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
-          <button onclick="refreshGrades()">Refresh Grades</button>
+          <div style="margin-top: 20px;">
+            <button onclick="logout()">Logout</button>
+            <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
+            <button onclick="refreshGrades()">Refresh Grades</button>
+          </div>
         `;
 
-        document.getElementById("result").innerHTML = html;
-        document.getElementById("login").style.display = "none";
+        if (resultDiv) {
+          resultDiv.innerHTML = html;
+        }
+        
+        // Hide the login card safely
+        const loginCard = document.getElementById("login");
+        if (loginCard) {
+          loginCard.style.display = "none";
+        }
 
       } else {
-        document.getElementById("result").innerText = "❌ Invalid username or password.";
+        if (resultDiv) resultDiv.innerText = "❌ Invalid username or password.";
       }
     })
     .catch(err => {
       console.error(err);
-      document.getElementById("result").innerText = "⚠️ Cannot connect to server.";
+      if (resultDiv) resultDiv.innerText = "⚠️ Cannot connect to server.";
     })
     .finally(() => {
       isLoading = false;
@@ -131,8 +142,14 @@ function login(usernameInput = null, passwordInput = null) {
 }
 
 // Press Enter to login
-document.getElementById("password").addEventListener("keypress", e => {
-  if (e.key === "Enter") login();
+// Wrapped in a DOMContentLoaded check to ensure it attaches reliably
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordField = document.getElementById("password");
+  if (passwordField) {
+    passwordField.addEventListener("keypress", e => {
+      if (e.key === "Enter") login();
+    });
+  }
 });
 
 // Refresh grades for current user
