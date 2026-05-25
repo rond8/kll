@@ -1,11 +1,11 @@
-// student.js
 
-const apiURL = "https://script.google.com/macros/s/AKfycbylFQOLgi-k-sDp4MdiuyHkgADZjmPHCbZ9aZKU-KgiTwqxm_5sXdWWLaJ5M14xijk/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbw7wGp9i_-RWwbUB0oAu4XvBgHzEUMepboWo9plOP1gNOESI_PSumG_mKEhXXjbRQQ/exec";
 
 let currentUser = null;
 let currentPass = null;
 let isLoading = false;
 
+// Map numeric years to display strings
 const yearMap = {
   1: "1st year",
   2: "2nd year",
@@ -16,19 +16,17 @@ const yearMap = {
 function login(usernameInput = null, passwordInput = null) {
   if (isLoading) return;
 
-  const username = usernameInput ? usernameInput : (document.getElementById("username") ? document.getElementById("username").value.trim() : "");
-  const password = passwordInput ? passwordInput : (document.getElementById("password") ? document.getElementById("password").value.trim() : "");
-  const resultDiv = document.getElementById("result");
+  const username = usernameInput || document.getElementById("username").value.trim();
+  const password = passwordInput || document.getElementById("password").value.trim();
 
   if (!username || !password) {
-    if (resultDiv) resultDiv.innerText = "Enter username and password";
+    document.getElementById("result").innerText = "Enter username and password";
     return;
   }
 
   isLoading = true;
-  if (resultDiv) resultDiv.innerText = "Logging in...";
+  document.getElementById("result").innerText = "Logging in...";
 
-  // CORRECTED: Fixed parameters query concatenation with correct formatting (&)
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
     "&password=" + encodeURIComponent(password) +
@@ -43,8 +41,10 @@ function login(usernameInput = null, passwordInput = null) {
         currentUser = username;
         currentPass = password;
 
+        // Sort grades by year and semester
         data.grades.sort((a, b) => a.year - b.year || a.semester - b.semester);
 
+        // Group grades by year
         const grouped = {
           "1st year": [],
           "2nd year": [],
@@ -73,16 +73,16 @@ function login(usernameInput = null, passwordInput = null) {
                 <td>${g.coursecode}</td>
                 <td>${g.subject}</td>
                 <td>${g.teacher}</td>
-                <td><strong>${g.grade}</strong></td>
+                <td>${g.grade}</td>
               </tr>
             `;
           });
 
           return `
             <h3>${label}</h3>
-            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+            <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
               <thead>
-                <tr style="background-color: #f3f4f6;">
+                <tr>
                   <th>Semester</th>
                   <th>Course Code</th>
                   <th>Subject</th>
@@ -94,6 +94,7 @@ function login(usernameInput = null, passwordInput = null) {
                 ${rows}
               </tbody>
             </table>
+            <br>
           `;
         }
 
@@ -107,46 +108,40 @@ function login(usernameInput = null, passwordInput = null) {
         }
 
         html += `
-          <div style="margin-top: 20px;">
-            <button onclick="logout()">Logout</button>
-            <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
-            <button onclick="refreshGrades()">Refresh Grades</button>
-          </div>
+          <button onclick="logout()">Logout</button>
+          <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
+          <button onclick="refreshGrades()">Refresh Grades</button>
         `;
 
-        if (resultDiv) resultDiv.innerHTML = html;
-        
-        const loginCard = document.getElementById("login");
-        if (loginCard) loginCard.style.display = "none";
+        document.getElementById("result").innerHTML = html;
+        document.getElementById("login").style.display = "none";
 
       } else {
-        if (resultDiv) resultDiv.innerText = "❌ Invalid username or password.";
+        document.getElementById("result").innerText = "❌ Invalid username or password.";
       }
     })
     .catch(err => {
       console.error(err);
-      if (resultDiv) resultDiv.innerText = "⚠️ Cannot connect to server.";
+      document.getElementById("result").innerText = "⚠️ Cannot connect to server.";
     })
     .finally(() => {
       isLoading = false;
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const passwordField = document.getElementById("password");
-  if (passwordField) {
-    passwordField.addEventListener("keypress", e => {
-      if (e.key === "Enter") login();
-    });
-  }
+// Press Enter to login
+document.getElementById("password").addEventListener("keypress", e => {
+  if (e.key === "Enter") login();
 });
 
+// Refresh grades for current user
 function refreshGrades() {
   if (currentUser && currentPass) {
     login(currentUser, currentPass);
   }
 }
 
+// Logout
 function logout() {
   currentUser = null;
   currentPass = null;
