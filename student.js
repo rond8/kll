@@ -110,7 +110,7 @@ function login(usernameInput = null, passwordInput = null) {
 
         html += `
           <button onclick="logout()">Logout</button>
-          <button onclick="location.href='schedule.html'">CLASS SCHEDULE</button>
+          <button onclick="location.href='${data.course}schedule.html'">CLASS SCHEDULE</button>
           <button onclick="refreshGrades()">Refresh Grades</button>
         `;
 
