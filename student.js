@@ -27,6 +27,9 @@ function login(usernameInput = null, passwordInput = null) {
 
   isLoading = true;
   document.getElementById("result").innerText = "Logging in...";
+  document.getElementById("result").style.backgroundColor = "red";
+  Document.getElementById("result").style.color = "white";
+
 
   const url = apiURL +
     "?username=" + encodeURIComponent(username) +
